@@ -1,0 +1,31 @@
+site_name: NSPS Connector Implementation Guide
+site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide
+theme:
+    name: material
+    logo: assets/images/portaone-main-logo.png
+    favicon: assets/images/favicon.ico
+    font:
+        text: Roboto
+        code: Red Hat Mono
+    palette:
+        #Dark mode
+        - scheme: slate
+          toggle:
+              icon: material/weather-sunny
+              name: Dark mode
+          primary: blue
+          accent: blue
+
+        #Light mode
+        - scheme: default
+          toggle:
+              icon: material/weather-night
+              name: Light mode
+          primary: blue
+          accent: blue
+
+markdown_extensions:
+    - attr_list
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences

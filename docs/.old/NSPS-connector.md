@@ -40,7 +40,7 @@ The example provided in this document is designed to run in GCP or AWS. However,
 
 The interaction of the components is shown in the diagram below.
 
-![Diagram of component interaction](assets/diagrams/component-interaction.png)
+![Diagram of component interaction](../assets/diagrams/component-interaction.png)
 
 ## Implementation specific
 
@@ -65,15 +65,15 @@ The connector should provide 2 methods:
 
 You can view or download an example of the OpenAPI specification below.
 
-[![OpenAPI.json](assets/images/placeholder-small-file.png)](https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide?preview=/277253881/283843264/OpenAPI.json#NSPSConnectorImplementationGuide-Purpose)
+[![OpenAPI.json](../assets/images/placeholder-small-file.png)](https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide?preview=/277253881/283843264/OpenAPI.json#NSPSConnectorImplementationGuide-Purpose)
 
-[Click here to view/download OpenAPI spec](assets/OpenAPI.json)
+[Click here to view/download OpenAPI spec](../assets/OpenAPI.json)
 
 <!-- <details>
   <summary>Click here to expand OpenAPI spec ...</summary>
 
 ```json
-{% include_relative assets/OpenAPI.json %}
+{% include_relative ../assets/OpenAPI.json %}
 ```
 </details>  -->
 
@@ -84,7 +84,7 @@ The [ESPF event](https://docs.portaone.com/docs/mr121-events-that-espf-handlers-
 <details>
   <summary>Example of ESPF event</summary>
 
-```json title="Example of ESPF event" linenums="1"
+```json
 {
     "event_type": "SIM/Updated",
     "variables": {
