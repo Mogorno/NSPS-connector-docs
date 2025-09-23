@@ -1,4 +1,4 @@
-# NSPS Connector Implementation Guide
+# Introducing NSPS Connector
 
 ## Table of Contents
 
