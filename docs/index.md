@@ -17,6 +17,20 @@ The [**connector**][connector] is a service that **receives** events enriched by
 
 The interaction of the components is shown in the diagram below.
 
+<div class="mermaid">
+flowchart LR
+    subgraph GC [Google Cloud]
+        NSPS
+    end
+    subgraph CloudVendors [Google Cloud, Azure, Amazon]
+        Connector
+    end
+    A["PortaBilling"] -- Event --> GC
+    A["PortaBilling"] <-- Enrich event with SIM, Account, etc. --> GC
+    GC -- Send enriched event --> CloudVendors
+    CloudVendors -- Provision --> D["External Systems"]
+</div>
+
 ![Diagram of component interaction][diagram-of-component-interaction]
 
 > **Note:**
