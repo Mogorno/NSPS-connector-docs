@@ -3,15 +3,20 @@ site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementatio
 nav:
     - Introduction: index.md
     - NSPS:
-        - NSPS/overview.md
-        - NSPS/data-flows.md
-        - NSPS/technical-specifications.md
+          - NSPS/overview.md
+          - NSPS/data-flows.md
+          - NSPS/technical-specifications.md
     - Connector:
-        - connector/overview.md
-        - connector/implementation-specific.md
-        - connector/deployment.md
-        - connector/testing.md
-    - Examples: examples/
+          - connector/overview.md
+          - connector/implementation-specific.md
+          - connector/deployment.md
+          - connector/testing.md
+    - Examples:
+          - WTL HLR HSS Connector:
+                - examples/wtl_hlr_hss_connector/overview.md
+                - examples/wtl_hlr_hss_connector/workflow.md
+                - examples/wtl_hlr_hss_connector/explained.md
+
 theme:
     name: material
     logo: assets/images/portaone-main-logo.png
