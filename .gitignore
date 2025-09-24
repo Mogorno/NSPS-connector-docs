@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.wtl_hlr_hss_connector-main
+.examples
