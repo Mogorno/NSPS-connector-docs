@@ -23,7 +23,7 @@ async def process_event(event_data: Event):
     return event_processor.process_event(event_data)
 ```
 
-[View source: `app/main.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py)
+[View source: `app/main.py`][app/main.py]
 
 ---
 
@@ -46,7 +46,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     return credentials.credentials
 ```
 
-[View source: `app/main.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py)
+[View source: `app/main.py`][app/main.py]
 
 - Why Bearer here: NSPS authenticates with a shared secret; rotating the token only requires changing env vars.
 - Failure behavior: 401 is returned with `WWW-Authenticate: Bearer`, which is standard for API clients.
@@ -72,7 +72,7 @@ async def request_context_middleware(request: Request, call_next):
     return response
 ```
 
-[View source: `app/core/middleware.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/middleware.py)
+[View source: `app/core/middleware.py`][app/core/middleware.py]
 
 - Log shape: JSON via structlog with automatic timestamp and traced IDs.
 
@@ -107,7 +107,7 @@ class ESPFEvent(BaseModel):
     )
 ```
 
-[View source: `app/models/events.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/events.py)
+[View source: `app/models/events.py`][app/models/events.py]
 
 ## 5. Map event_type → WTL action
 
@@ -138,7 +138,7 @@ class EventWTLActionMapper(BaseModel):
         return EVENT_ACTION_MAP.get(self.event_type)
 ```
 
-[View source: `app/models/wtl.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/wtl.py)
+[View source: `app/models/wtl.py`][app/models/wtl.py]
 
 ## 6. Extract and derive identifiers and attributes
 
@@ -179,7 +179,7 @@ def validate_imsi_using_regex(self, imsi: str) -> bool:
     return True
 ```
 
-[View source: `app/services/pb_event.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/pb_event.py)
+[View source: `app/services/pb_event.py`][app/services/pb_event.py]
 
 ```py title="app/core/event_processor.py" linenums="56"
 subscriber_status = SubscriberStatus.OPERATOR_DETERMINED_BARRING.value
@@ -190,7 +190,7 @@ if (
     subscriber_status = SubscriberStatus.SERVICE_GRANTED.value
 ```
 
-[View source: `app/core/event_processor.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py)
+[View source: `app/core/event_processor.py`][app/core/event_processor.py]
 
 ## 7. Build the unified WTL request
 
@@ -207,7 +207,7 @@ request_data = UnifiedSyncRequest(
 )
 ```
 
-[View source: `app/core/event_processor.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py)
+[View source: `app/core/event_processor.py`][app/core/event_processor.py]
 
 ## 8. Call WTL API and map errors
 
@@ -230,7 +230,7 @@ with httpx.Client(
         )
 ```
 
-[View source: `app/services/wtl_client.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/wtl_client.py)
+[View source: `app/services/wtl_client.py`][app/services/wtl_client.py]
 
 ## 9. Return response
 
@@ -243,4 +243,14 @@ return JSONResponse(
 )
 ```
 
-[View source: `app/core/event_processor.py`](https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py)
+[View source: `app/core/event_processor.py`][app/core/event_processor.py]
+
+<!-- References -->
+
+[app/main.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py
+[app/core/middleware.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/middleware.py
+[app/models/events.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/events.py
+[app/models/wtl.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/wtl.py
+[app/services/pb_event.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/pb_event.py
+[app/core/event_processor.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py
+[app/services/wtl_client.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/wtl_client.py
