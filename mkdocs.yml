@@ -37,7 +37,13 @@ theme:
           accent: blue
 
 markdown_extensions:
+    - admonition
+    - codehilite
     - attr_list
     - pymdownx.inlinehilite
     - pymdownx.snippets
     - pymdownx.superfences
+
+plugins:
+    - search
+    - mermaid2
