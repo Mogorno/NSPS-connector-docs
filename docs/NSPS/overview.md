@@ -28,4 +28,4 @@ This service is being developed as a **multi-instance solution**, where the full
 - Storage Area: Persistent storage for events, configuration, and state.
 
 <!-- References -->
-[connector]: ../connector/overview.md
+[connector]: ../overview.md

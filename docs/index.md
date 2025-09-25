@@ -47,4 +47,4 @@ flowchart LR
 [docker-swarm]: https://wiki.portaone.com/x/0fWuCg
 
 [nsps]: NSPS/overview.md
-[connector]: connector/overview.md
+[connector]: overview.md
