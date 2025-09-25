@@ -35,8 +35,8 @@ flowchart LR
 >
 > - Hosting expenses for your connectors deployed in cloud platforms **won't be covered** by PortaOne.
 > - There is a local deployment option, at no extra cost, to consider:
->     - assuming test purposes or development - local PC/laptop
->     - assuming production but low traffic / load (otherwise, extra server(s) is required to handle the load): [Docker Swarm managed via PortaBilling Portainer Stack](https://wiki.portaone.com/x/0fWuCg)
+>     - assuming test purposes or development - local PC/laptop;
+>     - assuming production but low traffic / load (otherwise, extra server(s) is required to handle the load): [Docker Swarm managed via PortaBilling Portainer Stack][docker-swarm].
 
 ## Get started
 
@@ -44,6 +44,7 @@ flowchart LR
 
 <!-- References -->
 [portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/
+[docker-swarm]: https://wiki.portaone.com/x/0fWuCg
 
 [nsps]: NSPS/overview.md
 [connector]: connector/overview.md
