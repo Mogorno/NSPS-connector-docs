@@ -33,7 +33,7 @@ The set of fields in the variables object may vary depending on the event type (
 
 ## Output
 
-NSPS outputs enriched events to **connector microservices**, which are responsible for interfacing with external systems. The enriched event contains all necessary data for provisioning:
+NSPS outputs enriched events to [**connector microservices**][connector], which are responsible for interfacing with external systems. The enriched event contains all necessary data for provisioning:
 
 <details>
   <summary>Example of enriched event</summary>
@@ -142,3 +142,6 @@ NSPS outputs enriched events to **connector microservices**, which are responsib
 </details>
 
 The connectors, which are outside the NSPS black box, then transform this enriched data into formats specific to each external system. Depending on the event type and the target external system, different subsets of these fields may be used for the transformation.
+
+<!-- References -->
+[connector]: ../connector-overview.md

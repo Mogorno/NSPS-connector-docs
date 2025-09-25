@@ -4,9 +4,9 @@ Since the connector is designed as a Docker microservice, it can be deployed in 
 
 **Example for GCP**: [deploy as a Cloud Run][gcp-deploy]. Official guide on how to deploy Cloud Run services you can find [here][gcp-deploy-official-guide].
 
-A Cloud Run service URL typically follows the format: `https://[TAG---]SERVICE_IDENTIFIER.run.app`. `SERVICE_IDENTIFIER` is a unique, stable identifier for the service, and the TAG refers to the traffic tag of the specific revision. The SERVICE_IDENTIFIER includes a random string and the region shortcut.
+A Cloud Run service URL typically follows the format: `https://[TAG---]SERVICE_IDENTIFIER.run.app`. `SERVICE_IDENTIFIER` is a unique, stable identifier for the service, and the TAG refers to the traffic tag of the specific revision. The `SERVICE_IDENTIFIER` includes a random string and the region shortcut.
 
-https://[TAG---]SERVICE_NAME-PROJECT_NUMBER.REGION.run.app
+`https://[TAG---]SERVICE_NAME-PROJECT_NUMBER.REGION.run.app`
 
 where:
 
@@ -23,7 +23,7 @@ For example: `https://abcd1234efgh.us-east-1.awsapprunner.com`
 
 ## Infrastructure Considerations
 
-The default deployment of NSPS, PortaBilling, and Connector/Core is intended to run in a **public internet environment**, where services can communicate freely over the network. However, in specific cases, it may be necessary to restrict public access to components for security reasons.
+The default deployment of [NSPS][nsps], PortaBilling, and Connector/Core is intended to run in a **public internet environment**, where services can communicate freely over the network. However, in specific cases, it may be necessary to restrict public access to components for security reasons.
 
 At this time, we can provide a **static IP address** used by NSPS to make requests to both the Connector and PortaBilling.
 
@@ -37,3 +37,5 @@ VPN connectivity is not currently supported and is under consideration ([DO-5364
 [aws-deploy]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/_aws-deploy?ref_type=heads
 [aws-deploy-official-guide]: https://docs.aws.amazon.com/apprunner/latest/dg/manage-deploy.html
 [do-5364]: https://youtrack.portaone.com/issue/DO-5364
+
+[nsps]: NSPS/nsps-overview.md

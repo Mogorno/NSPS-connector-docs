@@ -11,7 +11,7 @@ The system consists of:
 - **External Network Systems** (e.g. HSS, PCRF etc): Requires updates based on the events received, with each system having its own proprietary API.
 - **NSPS (New Service Provisioning System)**: Processes events, enriches data, and provisions the necessary external network systems.
 
-The primary goal of the NSPS is to **automate** the provisioning and service updates of external network systems (e.g., HLR, PCRF) triggered by changes within PortaBilling. This includes some similar tasks such as service activation, deactivation, and configuration updates. NSPS is aimed to provide an alternative and light-weight tool for cloud provisioning to cover some basic flows. If some fancy workflow logic is needed - it's worth to consider [PortaOne Workflows solution][portaone-workflows-solution] instead.
+The primary goal of the NSPS is to **automate** the provisioning and service updates of external network systems triggered by changes within PortaBilling. This includes some similar tasks such as service activation, deactivation, and configuration updates. NSPS is aimed to provide an alternative and light-weight tool for cloud provisioning to cover some basic flows. If some fancy workflow logic is needed - it's worth to consider [PortaOne Workflows solution][portaone-workflows-solution] instead.
 
 The [**connector**][connector] is a service that **receives** events enriched by NSPS from PortaBilling, **selects** the necessary parameters, and **sends** them to the external system in the format required by that external system.
 
@@ -46,5 +46,5 @@ flowchart LR
 [portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/
 [docker-swarm]: https://wiki.portaone.com/x/0fWuCg
 
-[nsps]: NSPS/overview.md
-[connector]: overview.md
+[nsps]: NSPS/nsps-overview.md
+[connector]: connector-overview.md
