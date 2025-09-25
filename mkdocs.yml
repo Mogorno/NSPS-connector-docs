@@ -10,7 +10,11 @@ nav:
         - NSPS/nsps-overview.md
         - NSPS/data-flows.md
         - NSPS/technical-specifications.md
-    - Examples: examples/
+    - Examples:
+          - WTL HLR HSS Connector:
+                - examples/wtl_hlr_hss_connector/overview.md
+                - examples/wtl_hlr_hss_connector/workflow.md
+                - examples/wtl_hlr_hss_connector/explained.md
 theme:
     name: material
     logo: assets/images/portaone-main-logo.png
