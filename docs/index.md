@@ -19,6 +19,20 @@ The interaction of the components is shown in the diagram below.
 
 ![Diagram of component interaction][diagram-of-component-interaction]
 
+```mermaid
+flowchart LR
+    A[PortaBilling] -->|Event| B
+    B <-->|Enrich event with SIM, Account, etc.| A
+    B -->|Send enriched event| C
+    C -->|Provision| D[External Systems]
+    subgraph Cloud1[Google Cloud]
+        B[NSPS]
+    end
+    subgraph Cloud2[Google Cloud, Azure, Amazon, etc.]
+        C{Connector}
+    end
+```
+
 > **Note:**
 >
 > - Hosting expenses for your connectors deployed in cloud platforms **won't be covered** by PortaOne.
@@ -31,8 +45,8 @@ The interaction of the components is shown in the diagram below.
 <!-- Instruction to use MCP server -->
 
 <!-- References -->
-[portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/
 
+[portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/
 [nsps]: NSPS/overview.md
 [connector]: connector/overview.md
 [diagram-of-component-interaction]: assets/diagrams/component-interaction.png
