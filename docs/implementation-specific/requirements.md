@@ -30,3 +30,11 @@ You can view or download an example of the OpenAPI specification below.
 {% include_relative assets/OpenAPI.json %}
 ```
 </details>  -->
+
+<!-- References -->
+
+[events]: https://docs.portaone.com/docs/mr121-events-that-espf-handlers-support?topic=eventsender-handler-events
+[external-api-server]: https://swagger.io/docs/specification/v3_0/api-host-and-base-path/
+[wtl-hlr/hss-connector]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector
+[openapi.json]: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide?preview=/277253881/283843264/OpenAPI.json#NSPSConnectorImplementationGuide-Purpose
+[openapi-spec]: ../assets/OpenAPI.json

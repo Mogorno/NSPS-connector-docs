@@ -425,8 +425,8 @@ VD counter information from PortaBilling
 [eventsender]: https://docs.portaone.com/docs/mr121-provisioning-via-webhooks?topic=provisioning-event-version
 [variables]: https://docs.portaone.com/docs/mr121-provisioning-via-webhooks?topic=provisioning-event-version
 [api-requests]: https://docs.portaone.com/
-[nsps]: ../../../NSPS/overview.md
-[enriched-event]: ../../../NSPS/data-flows.md#output
+[nsps]: ../../../NSPS/nsps-overview
+[enriched-event]: ../../../NSPS/data-flows#output
 [portabilling-data]: #portabilling-data
 [account-info]: #account-info
 [assigned-add-on]: #assigned-add-on

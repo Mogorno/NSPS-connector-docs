@@ -3,7 +3,7 @@
 ## Performance and Scalability
 
 - **Throughput Capacity**: Supports up to 10 million mobile subscribers.
-- **Event Processing Time**: Processes single events within 3 seconds of receipt (excluding API response time from PortaBilling and processing time on connector and external system side).
+- **Event Processing Time**: Processes single events within 3 seconds of receipt (excluding API response time from PortaBilling and processing time on [connector][connector] and external system side).
 - **Queue Capacity**: Unlimited event buffering through cloud-based queuing (PubSub).
 - **Retry Capabilities**:
     - Main subscription: ~24 hours of retries (100 attempts, 1-10 minutes delay).
@@ -33,3 +33,6 @@
     - Manual replay capability for persistent failures.
 - **Maintenance Mode**: Ability to pause event processing during maintenance windows.
 - **Monitoring**: Real-time monitoring of queue depths, processing rates, and error counts.
+
+<!-- References -->
+[connector]: ../connector-overview.md
