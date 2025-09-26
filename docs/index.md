@@ -17,8 +17,6 @@ The [**connector**][connector] is a service that **receives** events enriched by
 
 The interaction of the components is shown in the diagram below.
 
-![Diagram of component interaction][diagram-of-component-interaction]
-
 ```mermaid
 flowchart LR
     A[PortaBilling] -->|Event| B
@@ -39,8 +37,6 @@ flowchart LR
 > - There is a local deployment option, at no extra cost, to consider:
 >     - assuming test purposes or development - local PC/laptop;
 >     - assuming production but low traffic / load (otherwise, extra server(s) is required to handle the load): [Docker Swarm managed via PortaBilling Portainer Stack][docker-swarm].
-
-## Get started
 
 <!-- Instruction to use MCP server -->
 
