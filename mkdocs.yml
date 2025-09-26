@@ -3,22 +3,34 @@ site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementatio
 nav:
     - Introduction: index.md
     - connector-overview.md
-    - implementation-specific.md
+    - NSPS:
+          - NSPS/nsps-overview.md
+          - NSPS/data-flows.md
+          - NSPS/technical-specifications.md
+    - Implementation Specific:
+          - implementation-specific/requirements.md
+          - Request Handling:
+                - implementation-specific/request-handling/request-body.md
+                - implementation-specific/request-handling/request-headers.md
+                - implementation-specific/request-handling/event-types.md
+          - implementation-specific/configuration.md
+          - implementation-specific/logging.md
+          - implementation-specific/error-handling.md
     - deployment.md
     - testing.md
-    - NSPS:
-        - NSPS/nsps-overview.md
-        - NSPS/data-flows.md
-        - NSPS/technical-specifications.md
     - Examples:
           - WTL HLR HSS Connector:
-                - examples/wtl_hlr_hss_connector/overview.md
-                - examples/wtl_hlr_hss_connector/workflow.md
-                - examples/wtl_hlr_hss_connector/explained.md
+                - examples/wtl-hlr-hss-connector/overview.md
+                - examples/wtl-hlr-hss-connector/workflow.md
+                - examples/wtl-hlr-hss-connector/explained.md
+
 theme:
     name: material
     logo: assets/images/portaone-main-logo.png
     favicon: assets/images/favicon.ico
+    features:
+        - content.code.copy
+        - navigation.footer
     font:
         text: Roboto
         code: Red Hat Mono
@@ -41,12 +53,30 @@ theme:
 
 markdown_extensions:
     - admonition
-    - codehilite
     - attr_list
+    - pymdownx.emoji:
+          emoji_index: !!python/name:material.extensions.emoji.twemoji
+          emoji_generator: !!python/name:material.extensions.emoji.to_svg
+    - tables
+    - pymdownx.highlight:
+          anchor_linenums: true
+          line_spans: __span
+          pygments_lang_class: true
     - pymdownx.inlinehilite
     - pymdownx.snippets
-    - pymdownx.superfences
+    - pymdownx.superfences:
+          custom_fences:
+              - name: mermaid
+                class: mermaid
+                format: !!python/name:pymdownx.superfences.fence_code_format
+    - pymdownx.tabbed:
+          alternate_style: true
+    - pymdownx.details
+    - md_in_html
+    - abbr
+    - def_list
 
-plugins:
-    - search
-    - mermaid2
+extra_css:
+    - stylesheets/extra.css
+
+copyright: Copyright &copy; 2025 PortaOne, Inc. All rights reserved.

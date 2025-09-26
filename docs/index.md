@@ -17,19 +17,21 @@ The [**connector**][connector] is a service that **receives** events enriched by
 
 The interaction of the components is shown in the diagram below.
 
-<div class="mermaid">
+![Diagram of component interaction][diagram-of-component-interaction]
+
+```mermaid
 flowchart LR
-    subgraph GC [Google Cloud]
-        NSPS
+    A[PortaBilling] -->|Event| B
+    B <-->|Enrich event with SIM, Account, etc.| A
+    B -->|Send enriched event| C
+    C -->|Provision| D[External Systems]
+    subgraph Cloud1[Google Cloud]
+        B[NSPS]
     end
-    subgraph CloudVendors [Google Cloud, Azure, Amazon]
-        Connector
+    subgraph Cloud2[Google Cloud, Azure, Amazon, etc.]
+        C{Connector}
     end
-    A["PortaBilling"] -- Event --> GC
-    A["PortaBilling"] <-- Enrich event with SIM, Account, etc. --> GC
-    GC -- Send enriched event --> CloudVendors
-    CloudVendors -- Provision --> D["External Systems"]
-</div>
+```
 
 > **Note:**
 >
@@ -43,8 +45,8 @@ flowchart LR
 <!-- Instruction to use MCP server -->
 
 <!-- References -->
+
 [portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/
 [docker-swarm]: https://wiki.portaone.com/x/0fWuCg
-
 [nsps]: NSPS/nsps-overview.md
 [connector]: connector-overview.md
