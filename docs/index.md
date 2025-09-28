@@ -2,7 +2,7 @@
 
 NSPS Connector Implementation Guide provides **implementation and configuration guidance** for partners wishing to **integrate their connectors with the [NSPS][nsps]** using Docker microservices. Please note that it **does not cover** topics such as monitoring, high availability, disaster recovery, or other operational and infrastructure-related aspects. These areas are considered out of scope and are the responsibility of the solution architect overseeing the connector’s deployment and maintenance.
 
-## Provisioning system overview
+## Provisioning System Overview
 
 The system consists of:
 

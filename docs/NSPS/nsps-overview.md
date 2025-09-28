@@ -4,7 +4,7 @@ The **New Service Provisioning System (NSPS)** is designed to **receive, queue, 
 
 This service is being developed as a **multi-instance solution**, where the full set of components will be deployed separately for each individual customer and/or PortaBilling environment.
 
-## How it works
+## How It Works
 
 1. PortaBilling generates an event (e.g., a subscriber upgrades their plan).
 2. The built-in External system provisioning framework (ESPF) sends this event to NSPS via an HTTP request ([webhook][webhook]).
@@ -12,7 +12,7 @@ This service is being developed as a **multi-instance solution**, where the full
 4. The NSPS queues the event and passes it to the [connector][connector].
 5. The connector communicates with the external system to apply the required changes.
 
-## High-level system areas
+## High-Level System Areas
 
 - Service Area: Event processing components for handling ESPF events and provisioning external systems.
 - Management Area: Configuration and monitoring components for system administration.

@@ -1,4 +1,4 @@
-# Data flows
+# Data Flows
 
 ## Input
 
