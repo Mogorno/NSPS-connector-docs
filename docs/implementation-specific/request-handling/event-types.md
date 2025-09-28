@@ -4,14 +4,6 @@
 
 ### Trigger conditions
 
-Bundle is successfully activated for the first time (the bundle has never been activated for this account before).
-Bundle is assigned to the account.
-Bundle has expired (for bundles of the balance-dependant renewable type).
-Grace period for the bundle is over (for bundles of the balance-dependant renewable type).
-Bundle is removed from the account.
-Bundle is automatically renewed for the account (for bundles of the balance-dependant renewable type).
-Bundle is successfully activated after expiration (for bundles of the balance-dependant renewable type).
-
 - SIM card details have been changed, e.g., the default PIN for inactive SIM cards has been changed.
 - The SIM card data specified in a custom field has been changed, e.g., the “Amazon” value is set in the “Marketplace” custom field.
 - [SIM card status][sim-card-status] has been changed, e.g., from “In use” to “Disposed”.

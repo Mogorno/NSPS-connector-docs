@@ -42,3 +42,9 @@ mkdocs serve
 ```
 mkdocs build
 ```
+
+# 7. Make MD files available at the same URL as HTML
+
+```
+python copy_md.py
+```
