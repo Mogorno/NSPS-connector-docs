@@ -1,0 +1,24 @@
+{
+    "$schema": "https://context7.com/schema/context7.json",
+    "projectTitle": "NSPS Connector Implementation Guide",
+    "description": "Comprehensive guide for developers to implement connectors for NSPS. Includes requirements, configuration, error handling, logging, request/response formats, and integration examples.",
+    "folders": ["docs"],
+    "excludeFolders": [
+        "docs/.old",
+        "docs/assets/diagrams",
+        "docs/assets/images",
+        "docs/stylesheets"
+    ],
+    "excludeFiles": [],
+    "rules": [
+        "Include all documentation and examples relevant to implementing NSPS connectors.",
+        "Include OpenAPI.json to provide API schema and event/request examples.",
+        "Focus on requirements, configuration, error handling, logging, request/response formats, and workflow sections."
+    ],
+    "previousVersions": [
+        {
+            "tag": "v1.0.0",
+            "title": "Initial implementation guide"
+        }
+    ]
+}
