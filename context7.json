@@ -9,7 +9,8 @@
         "docs/assets/images",
         "docs/stylesheets"
     ],
-    "excludeFiles": [],
+    "excludeFiles": ["*.*"],
+
     "rules": [
         "Include all documentation and examples relevant to implementing NSPS connectors.",
         "Include OpenAPI.json to provide API schema and event/request examples.",
