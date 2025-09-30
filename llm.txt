@@ -1,0 +1,52 @@
+# NSPS Connector Implementation Guide
+
+> Comprehensive guide to implement connectors between NSPS and external network systems.
+
+## Key Concepts
+
+- **NSPS (New Service Provisioning System)**: Processes events, enriches data, and sends them to the connector.
+- **Connector**: Receives events enriched by NSPS, selects the necessary parameters, and sends them to the external system in the format required by that external system.
+- **External Network Systems*: Requires updates based on the events received, with each system having its own proprietary API.
+
+## Docs
+
+- [Introduction](https://mogorno.github.io/NSPS-connector-docs/index.md):
+Overview of the entire provisioning system and the purpose of the connector.
+- [Connector overview](https://mogorno.github.io/NSPS-connector-docs/connector-overview.md):
+Overview of the connector and its key responsibilities.
+- [NSPS overview](https://mogorno.github.io/NSPS-connector-docs/NSPS/nsps-overview.md):
+Introduction to NSPS and its operation.
+- [NSPS data flows](https://mogorno.github.io/NSPS-connector-docs/NSPS/data-flows.md):
+Data received by NSPS and output passed to the connector.
+- [Connector requirements](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/requirements.md):
+Key functional and non-functional connector requirements.
+- [Request body](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/request-handling/request-body.md):
+Detailed description of data the connector must accept.
+- [Request headers](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/request-handling/request-headers.md):
+Headers sent from NSPS to the connector.
+- [Event types](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/request-handling/event-types.md):
+Detailed description of supported event types, their trigger conditions and key fields.
+- [Configuration](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/configuration.md):
+Requirements for connector configuration.
+- [Logging](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/logging.md):
+Logging requirements for the connector.
+- [Error handling](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/error-handling.md):
+Error-handling recommendations and response fields.
+- [Deployment](https://mogorno.github.io/NSPS-connector-docs/deployment.md):
+Cloud deployment instructions.
+- [Testing](https://mogorno.github.io/NSPS-connector-docs/testing.md):
+Recommendations for testing the connector.
+
+## Examples
+
+- [WTL HLR-HSS Connector overview](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/overview.md):
+Overview of WTL HLR-HSS Connector.
+- [WTL HLR-HSS Connector workflow](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/workflow.md):
+Concise description of WTL HLR-HSS Connector workflow.
+- [WTL HLR-HSS Connector flow explained](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/explained.md):
+Detailed explanation of WTL HLR-HSS Connector workflow with examples.
+
+## Optional
+
+- [NSPS technical specifications](https://mogorno.github.io/NSPS-connector-docs/NSPS/technical-specifications.md):
+NSPS technical specifications relevant for connector implementation.
