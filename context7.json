@@ -1,25 +1,36 @@
 {
-    "$schema": "https://context7.com/schema/context7.json",
-    "projectTitle": "NSPS Connector Implementation Guide",
-    "description": "Comprehensive guide for developers to implement connectors for NSPS. Includes requirements, configuration, error handling, logging, request/response formats, and integration examples.",
-    "folders": ["docs"],
-    "excludeFolders": [
-        "docs/.old",
-        "docs/assets/diagrams",
-        "docs/assets/images",
-        "docs/stylesheets"
-    ],
-    "excludeFiles": ["*.*"],
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "NSPS Connector Implementation Guide",
+  "description": "Developer guide for implementing NSPS connectors. Includes requirements, configuration, error handling, logging, request/response formats, and integration examples.",
 
-    "rules": [
-        "Include all documentation and examples relevant to implementing NSPS connectors.",
-        "Include OpenAPI.json to provide API schema and event/request examples.",
-        "Focus on requirements, configuration, error handling, logging, request/response formats, and workflow sections."
-    ],
-    "previousVersions": [
-        {
-            "tag": "v1.0.0",
-            "title": "Initial implementation guide"
-        }
-    ]
+  "folders": [
+    "docs",
+    "."
+  ],
+
+  "excludeFolders": [
+    "docs/.old",
+    "docs/assets/diagrams",
+    "docs/assets/images",
+    "docs/stylesheets"
+  ],
+
+  "excludeFiles": [
+    "*.*",
+    "!llms.txt"
+  ],
+
+  "rules": [
+    "Include all documentation and examples relevant to NSPS connector implementation.",
+    "Include OpenAPI.json for API schema and request/event examples.",
+    "Focus on requirements, configuration, error handling, logging, request/response formats, and workflow sections.",
+    "Use `llms.txt` as the grounding text for LLMs or MCP server navigation."
+  ],
+
+  "previousVersions": [
+    {
+      "tag": "v1.0.0",
+      "title": "Initial implementation guide"
+    }
+  ]
 }
