@@ -27,7 +27,7 @@ Key input fields:
 - `variables`: Contains identifiers and metadata for the event.
 - `i_event`: Unique event identifier in PortaBilling.
 - `i_account`: Account identifier affected by the event.
-- `event_time`: Optional timestamp when the event occurred (format: "YYYY-MM-DD HH:MM:SS" in UTC).
+- `event_time`: Optional timestamp when the event occurred (format: `YYYY-MM-DD HH:MM:SS` in UTC).
 
 The set of fields in the variables object may vary depending on the event type (`event_type`). Authentication is performed via HTTP Basic Auth with configurable credentials.
 
