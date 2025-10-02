@@ -25,6 +25,10 @@ nav:
                 - examples/wtl-hlr-hss-connector/workflow.md
                 - examples/wtl-hlr-hss-connector/explained.md
 
+watch:
+    - docs
+    - includes
+
 theme:
     name: material
     logo: assets/images/portaone-main-logo.png
@@ -64,7 +68,9 @@ markdown_extensions:
           line_spans: __span
           pygments_lang_class: true
     - pymdownx.inlinehilite
-    - pymdownx.snippets
+    - pymdownx.snippets:
+          auto_append: 
+              - includes/abbreviations.md
     - pymdownx.superfences:
           custom_fences:
               - name: mermaid

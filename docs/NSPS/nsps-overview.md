@@ -22,7 +22,7 @@ This service is being developed as a **multi-instance solution**, where the full
 
 External Network System is any third-party platform or telecom component that must stay synchronized with PortaBilling.
 
-These may include business tools (e.g., CRM systems, IPTV platforms) or mobile network elements (e.g., Home Subscriber Server (HSS), which manages subscriber identities, and Policy and Charging Rules Function (PCRF), which enforces policy and charging rules). External System may also be a database where users must be registered once they complete certain actions tracked by PortaBilling. Another example is an automated notification service that delivers messages based on events in PortaBilling.
+These may include business tools (e.g., CRM systems, IPTV platforms) or mobile network elements (e.g., HSS, which manages subscriber identities, and PCRF, which enforces policy and charging rules). External System may also be a database where users must be registered once they complete certain actions tracked by PortaBilling. Another example is an automated notification service that delivers messages based on events in PortaBilling.
 
 <!-- References -->
 [webhook]: https://docs.portaone.com/docs/mr121-provisioning-via-webhooks
