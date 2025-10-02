@@ -20,7 +20,7 @@ Connector can be easily created with AI help. To do this, you must provide the A
     1. Open `Settings` → `Cursor Settings` → `MCP` → `Add new global MCP server`.
     2. Paste the following configuration into `~/.cursor/mcp.json` file:
 
-    ```json
+    ```json title="~/.cursor/mcp.json"
     {
       "mcpServers": {
         "context7": {
@@ -40,7 +40,7 @@ Connector can be easily created with AI help. To do this, you must provide the A
 
     Alternatively, create a `.vscode/mcp.json` file in your workspace with the following content:
 
-    ```json
+    ```json title=".vscode/mcp.json"
     "mcp": {
       "servers": {
         "context7": {
@@ -56,17 +56,15 @@ Connector can be easily created with AI help. To do this, you must provide the A
 
 ## Prompt AI to Create a Connector
 
-> **Note:**
->
-> MCP server tools are available only when the AI runs in **Agent mode**.
+!!! note "Note"
+    MCP server tools are available only when the AI runs in **Agent mode**.
 
-Use the template below to instruct the AI. Replace the placeholders with details about your external system (ES).
+Use the template below to instruct the AI. Replace the placeholders with details about your [ES (external system)][external-system].
 
-> **Security tip:**
->
-> Do not share actual credentials in the prompt. Pass them securely through environment variables instead.
+!!! warning "Security tip"
+    Do not share actual credentials in the prompt. Pass them securely through environment variables instead.
 
-```
+```prompt title="Prompt template"
 Create a connector between NSPS and the external system <ES name> using the context7 library https://mogorno.github.io/NSPS-connector-docs/llms.txt.
 
 Short description: <Short description of the ES>
@@ -99,3 +97,5 @@ Additional details about the ES:
 [cursor]: https://cursor.com/download
 [vs-code]: https://code.visualstudio.com/download
 [context7]: https://context7.com/
+
+[external-system]: NSPS/nsps-overview.md#external-network-system

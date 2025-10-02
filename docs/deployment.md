@@ -2,12 +2,11 @@
 
 Since the connector is designed as a Docker microservice, it can be deployed in any cloud, for example, using a cloud-specific utility. Below are examples of scripts that you can use, but you can write your own that are simpler or more complex to suit your needs.
 
-> **Note:**
->
-> - Hosting expenses for your connectors deployed in cloud platforms **won't be covered** by PortaOne.
-> - There is a local deployment option, at no extra cost, to consider:
->     - assuming test purposes or development - local PC/laptop;
->     - assuming production but low traffic / load (otherwise, extra server(s) is required to handle the load): [Docker Swarm managed via PortaBilling Portainer Stack][docker-swarm].
+!!! note "Note"
+    - Hosting expenses for your connectors deployed in cloud platforms **won't be covered** by PortaOne.
+    - There is a local deployment option, at no extra cost, to consider:
+        - assuming test purposes or development - local PC/laptop;
+        - assuming production but low traffic / load (otherwise, extra server(s) is required to handle the load): [Docker Swarm managed via PortaBilling Portainer Stack][docker-swarm].
 
 **Example for GCP**: [deploy as a Cloud Run][gcp-deploy]. Official guide on how to deploy Cloud Run services you can find [here][gcp-deploy-official-guide].
 
