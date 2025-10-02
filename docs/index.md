@@ -31,8 +31,6 @@ flowchart LR
     end
 ```
 
-<!-- Instruction to use MCP server -->
-
 <!-- References -->
 [portabilling]: https://docs.portaone.com/docs/mr124-system-architecture-overview
 [portaone-workflows-solution]: https://www.portaone.com/telecom-products/portaone-workflows/

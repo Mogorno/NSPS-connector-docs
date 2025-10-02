@@ -2,6 +2,7 @@ site_name: NSPS Connector Implementation Guide
 site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide
 nav:
     - Introduction: index.md
+    - Create a Connector with AI: mcp-instruction.md
     - connector-overview.md
     - NSPS:
           - NSPS/nsps-overview.md
