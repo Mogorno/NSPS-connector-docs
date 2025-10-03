@@ -1,6 +1,7 @@
 site_name: NSPS Connector Implementation Guide
 site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide
 nav:
+    - get-started.md
     - Introduction: index.md
     - Create a Connector with AI: mcp-instruction.md
     - connector-overview.md
@@ -28,6 +29,9 @@ nav:
 watch:
     - docs
     - includes
+
+plugins:
+    - offline
 
 theme:
     name: material
@@ -69,7 +73,7 @@ markdown_extensions:
           pygments_lang_class: true
     - pymdownx.inlinehilite
     - pymdownx.snippets:
-          auto_append: 
+          auto_append:
               - includes/abbreviations.md
     - pymdownx.superfences:
           custom_fences:
