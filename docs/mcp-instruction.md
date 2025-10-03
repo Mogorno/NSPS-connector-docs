@@ -68,7 +68,7 @@ Use the template below to instruct the AI. Replace the placeholders with details
 Create a connector between NSPS and the external system <ES name> using the context7 library https://mogorno.github.io/NSPS-connector-docs/llms.txt.
 
 Short description: <Short description of the ES>
-API URL: <ES API URL>  # (optional, can also be provided via environment variable)
+API URL: <ES API URL>  # optional, can also be provided via environment variable
 
 Authentication:
 - Method: <auth type, e.g., API key / OAuth2 / Basic>
@@ -79,11 +79,16 @@ Supported event types:
   - handler ID: <handler ID>  # optional, if multiple handlers exist
   - required fields: <required fields>
   - NSPS → ES mapping action: <ES action>
-  - Example payload:
-    ```json
+  - Example request to ES API:
+    ```http
+    POST <ES API endpoint>
+    Authorization: <Authorization header / token>
+    Content-Type: <Content type>
+
     {
-      "<field1>": "<value>",
-      "<field2>": "<value>"
+      "<field1>": "<value1>",
+      "<field2>": "<value2>",
+      ...
     }
     ```
 
