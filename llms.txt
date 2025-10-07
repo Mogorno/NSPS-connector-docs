@@ -10,6 +10,8 @@
 
 ## Docs
 
+- [Get started](https://mogorno.github.io/NSPS-connector-docs/get-started.html):
+Example of creating a very simple connector in TypeScript and Python.
 - [Introduction](https://mogorno.github.io/NSPS-connector-docs/index.md):
 Overview of the entire provisioning system and the purpose of the connector.
 - [Connector overview](https://mogorno.github.io/NSPS-connector-docs/connector-overview.md):
