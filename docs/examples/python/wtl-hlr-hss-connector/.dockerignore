@@ -1,0 +1,40 @@
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+**/env
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+**/.tox
+**/.coverage
+**/.coverage.*
+**/.cache
+**/*.cover
+**/*.log
+**/.git
+**/.mypy_cache
+**/.hypothesis
+
+# Environment files
+.env
+.env.*
+!.env.example  # Include example file for reference
+
+# Documentation
+README.md
+docs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Development files
+docker-compose.override.yml
+*.dev.yml

@@ -1,6 +1,29 @@
-# Connector Flow Explained
+# Overview
 
-## 1. Accept request
+This guide explains an example of building an **NSPS connector** in **Python** using **FastAPI**.  
+The connector receives events from **NSPS**, validates and processes the payload, and then forwards the enriched data to an external system (in this example — **Google Sheets**).  
+It also demonstrates how to implement **Bearer token authentication** and how to construct proper responses for **NSPS**, ensuring events are handled correctly.
+
+You can find the full example repository here: [WTL HLR-HSS Connector][wtl_hlr_hss_connector]
+
+## Workflow
+
+1. Accept HTTP request to `POST /process-event` with Bearer auth.
+2. Set request context (trace IDs) and JSON logging via middleware.
+3. Validate payload against the `Event` schema (includes `data` and optional `pb_data`).
+4. Determine provisioning action from `event_type`.
+5. Extract required identifiers and attributes from `pb_data`:
+    - IMSI (required), MSISDN (from `account_info.id` when `bill_status == open`)
+    - Subscriber status derived from `blocked` and `bill_status`
+    - Profiles (`cs_profile`, `eps_profile`) from access policy or defaults
+    - Optional IMSI regex validation
+6. Build a unified request for the WTL API.
+7. Call the external WTL API with retry-safe HTTP client and map errors to typed responses.
+8. Return 202 on success (accepted/processed) or a standardized JSON error.
+
+## Connector Flow Explained
+
+### 1. Accept request
 
 The microservice exposes a single POST endpoint at `/process-event` using FastAPI. This endpoint is designed to be minimal, delegating all business logic to a processor function. The endpoint expects a JSON payload matching the `Event` schema and is protected by authentication (see next step). The handler simply receives the validated event data and passes it to the event processor, which orchestrates the rest of the workflow.
 
@@ -27,7 +50,7 @@ async def process_event(event_data: Event):
 
 ---
 
-## 2. Enforce Bearer auth
+### 2. Enforce Bearer auth
 
 Authentication is handled by a dependency (`Depends(verify_token)`) that checks for a valid Bearer token in the request. The `verify_token` function compares the provided token to a value stored in environment variables. If the token is missing or incorrect, the function raises an HTTP 401 error with a standard `WWW-Authenticate: Bearer` header, ensuring clients know how to authenticate. This approach centralizes security logic, making it easy to update or reuse across endpoints.
 
@@ -51,7 +74,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
 - Why Bearer here: NSPS authenticates with a shared secret; rotating the token only requires changing env vars.
 - Failure behavior: 401 is returned with `WWW-Authenticate: Bearer`, which is standard for API clients.
 
-## 3. Set request context and JSON logging
+### 3. Set request context and JSON logging
 
 Before processing each request, middleware sets up tracing context by extracting or generating unique request IDs from headers. This ensures every request is traceable in logs, even if the client does not provide tracing headers. The middleware attaches these IDs to the request context and logs the completion of each HTTP request in structured JSON format, including status codes and timestamps. This makes debugging and monitoring much easier, especially in distributed or cloud environments.
 
@@ -76,7 +99,7 @@ async def request_context_middleware(request: Request, call_next):
 
 - Log shape: JSON via structlog with automatic timestamp and traced IDs.
 
-## 4. Validate payload against schemas
+### 4. Validate payload against schemas
 
 Incoming requests are validated against Pydantic models before any business logic runs. The `Event` model requires an `event_id`, a nested `data` object (with `event_type` and `variables`), and optionally a `pb_data` object. If any required fields are missing or malformed, FastAPI automatically returns a 422 error, making it clear to clients what is wrong with their request. This strict validation ensures that only well-formed data reaches the business logic, reducing the risk of runtime errors.
 
@@ -109,7 +132,7 @@ class ESPFEvent(BaseModel):
 
 [View source: `app/models/events.py`][app/models/events.py]
 
-## 5. Map event_type → WTL action
+### 5. Map event_type → WTL action
 
 The connector uses a mapping to translate incoming event types (such as `SIM/Updated`) into specific provisioning actions for the WTL system (like `update`). This mapping is explicit and easy to extend, making it clear which event types are supported. If an unknown event type is received, the system logs the event and returns a 202 response, ensuring that unsupported events do not break the NSPS pipeline. This design makes the connector robust and easy to maintain.
 
@@ -140,7 +163,7 @@ class EventWTLActionMapper(BaseModel):
 
 [View source: `app/models/wtl.py`][app/models/wtl.py]
 
-## 6. Extract and derive identifiers and attributes
+### 6. Extract and derive identifiers and attributes
 
 The connector extracts all required identifiers and attributes from the incoming event and its nested data. Helper methods in `pb_event.py` handle extraction of IMSI, MSISDN, account ID, billing status, block status, and profiles. These methods encapsulate logic for handling missing fields, applying defaults, and validating values (such as IMSI format via regex). This separation makes the code easier to test and adapt to changes in the event schema, and ensures that all required data is available before building the WTL request.
 
@@ -192,7 +215,7 @@ if (
 
 [View source: `app/core/event_processor.py`][app/core/event_processor.py]
 
-## 7. Build the unified WTL request
+### 7. Build the unified WTL request
 
 Once all required data is extracted and derived, the connector constructs a `UnifiedSyncRequest` object. This object aggregates all the necessary fields—IMSI, subscriber status, MSISDN list, CS and EPS profiles, and the action to perform. The use of Pydantic models ensures that the request is strictly validated before being sent, reducing the risk of malformed requests reaching the WTL API. This step keeps the business logic clean and focused on data transformation.
 
@@ -209,7 +232,7 @@ request_data = UnifiedSyncRequest(
 
 [View source: `app/core/event_processor.py`][app/core/event_processor.py]
 
-## 8. Call WTL API and map errors
+### 8. Call WTL API and map errors
 
 The connector sends the unified request to the WTL API using an HTTP client with a configurable timeout and custom headers. The response is parsed and validated against a response model. If the WTL API indicates a failure, the connector raises a domain-specific exception, which is then mapped to an appropriate HTTP error code for the client. This separation of concerns ensures that transport errors and business errors are handled cleanly and consistently.
 
@@ -232,7 +255,7 @@ with httpx.Client(
 
 [View source: `app/services/wtl_client.py`][app/services/wtl_client.py]
 
-## 9. Return response
+### 9. Return response
 
 After successful processing, the endpoint returns a JSON response with a 202 Accepted status. This signals to NSPS that the event was received and processed (or queued) successfully, allowing the pipeline to continue without waiting for downstream systems. If any error occurs, the connector returns a standardized error response with the appropriate HTTP status code, making it easy for clients to handle failures.
 
@@ -247,6 +270,7 @@ return JSONResponse(
 
 <!-- References -->
 
+[wtl_hlr_hss_connector]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector
 [app/main.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py
 [app/core/middleware.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/middleware.py
 [app/models/events.py]: https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/events.py

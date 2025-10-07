@@ -18,14 +18,15 @@ nav:
           - implementation-specific/configuration.md
           - implementation-specific/logging.md
           - implementation-specific/error-handling.md
+          - implementation-specific/best-practices.md
     - deployment.md
     - testing.md
     - Examples:
-          - WTL HLR HSS Connector:
-                - examples/wtl-hlr-hss-connector/overview.md
-                - examples/wtl-hlr-hss-connector/workflow.md
-                - examples/wtl-hlr-hss-connector/explained.md
-
+          - Python:
+                - WTL HLR HSS Connector: examples/python/wtl-hlr-hss-connector/overview.md
+                - Simple Connector FastAPI: examples/python/simple-connector-fastapi/overview.md
+          - TypeScript:
+                - Simple Connector Express: examples/typescript/simple-connector-express/overview.md
 watch:
     - docs
     - includes
