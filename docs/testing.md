@@ -106,8 +106,6 @@ We recommend testing the connector in a **controlled (artificial) environment** 
 **Input:**
 
 - Request: `GET /process-event`
-- Headers: valid Bearer token
-- Body: valid event
 
 **Response:**
 
