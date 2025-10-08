@@ -1,5 +1,5 @@
 site_name: NSPS Connector Implementation Guide
-site_url: https://wiki.portaone.com/display/REQSPEC/NSPS+Connector+Implementation+Guide
+site_url: https://mogorno.github.io/NSPS-connector-docs/
 nav:
     - get-started.md
     - Introduction: index.md
@@ -32,6 +32,7 @@ watch:
     - includes
 
 plugins:
+    - search
     - offline
 
 theme:
