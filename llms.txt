@@ -10,7 +10,7 @@
 
 ## Docs
 
-- [Get started](https://mogorno.github.io/NSPS-connector-docs/get-started.html):
+- [Get started](https://mogorno.github.io/NSPS-connector-docs/get-started.md):
 Example of creating a very simple connector in TypeScript and Python.
 - [Introduction](https://mogorno.github.io/NSPS-connector-docs/index.md):
 Overview of the entire provisioning system and the purpose of the connector.
@@ -34,6 +34,8 @@ Requirements for connector configuration.
 Logging requirements for the connector.
 - [Error handling](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/error-handling.md):
 Error-handling recommendations and response fields.
+- [Best practices](https://mogorno.github.io/NSPS-connector-docs/implementation-specific/best-practices.md)
+Best practices for connector development: authorization, input validation, responses to NSPS.
 - [Deployment](https://mogorno.github.io/NSPS-connector-docs/deployment.md):
 Cloud deployment instructions.
 - [Testing](https://mogorno.github.io/NSPS-connector-docs/testing.md):
@@ -41,12 +43,12 @@ Recommendations for testing the connector.
 
 ## Examples
 
-- [WTL HLR-HSS Connector overview](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/overview.md):
+- [WTL HLR-HSS Connector](https://mogorno.github.io/NSPS-connector-docs/examples/python/wtl-hlr-hss-connector/overview.md):
 Overview of WTL HLR-HSS Connector.
-- [WTL HLR-HSS Connector workflow](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/workflow.md):
-Concise description of WTL HLR-HSS Connector workflow.
-- [WTL HLR-HSS Connector flow explained](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/explained.md):
-Detailed explanation of WTL HLR-HSS Connector workflow with examples.
+- [Simple Connector (Python/FastAPI)](https://mogorno.github.io/NSPS-connector-docs/examples/python/simple-connector-fastapi/overview.md):
+Description of simple connector implemented with Python FastAPI.
+- [Simple Connector (TypeScript/Express)](https://mogorno.github.io/NSPS-connector-docs/examples/wtl-hlr-hss-connector/explained.md):
+Description of simple connector implemented with TypeScript Express.
 
 ## Optional
 
