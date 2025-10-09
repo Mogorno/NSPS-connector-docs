@@ -1,4 +1,4 @@
-# Get Started
+# Get Started [![edit icon](assets\images\file-edit-outline.svg){ .icon-link }](https://gitlab.com/sonya.brnv/test/-/edit/main/docs/get-started.md)
 
 ## NSPS Preparation
 
