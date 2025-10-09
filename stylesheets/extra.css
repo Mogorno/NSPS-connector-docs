@@ -1,0 +1,27 @@
+.md-tooltip {
+    top: inherit;
+    left: inherit;
+    margin-left: 12px;
+    margin-top: 7px;
+}
+
+/* Light mode (default scheme) */
+[data-md-color-scheme="default"] .icon-link {
+  content: url("../assets/images/edit-light.png");
+}
+/* Dark mode (slate scheme) */
+[data-md-color-scheme="slate"] .icon-link {
+  content: url("../assets/images/edit-dark.png");
+}
+.icon-link {
+  width: 24px;
+  height: 28.8px;
+  float: right;
+  margin-left: 8px;
+  vertical-align: middle;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+.icon-link:hover {
+  opacity: 1;
+}

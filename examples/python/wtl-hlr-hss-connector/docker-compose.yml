@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  wtl-hlr-hss-connector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: wtl-hlr-hss-connector
+    ports:
+      - "8000:8000"
+    # Environment variables are loaded from the .env file in the project root.
+    # To configure, copy .env.example to .env and edit your values.
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - wtl-network
+
+networks:
+  wtl-network:
+    driver: bridge

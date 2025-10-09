@@ -1,0 +1,1654 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mogorno.github.io/NSPS-connector-docs/examples/python/wtl-hlr-hss-connector/overview.html">
+      
+      
+        <link rel="prev" href="../../../testing.html">
+      
+      
+        <link rel="next" href="../simple-connector-fastapi/overview.html">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>WTL HLR HSS Connector - NSPS Connector Implementation Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="NSPS Connector Implementation Guide" class="md-header__button md-logo" aria-label="NSPS Connector Implementation Guide" data-md-component="logo">
+      
+  <img src="../../../assets/images/portaone-main-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NSPS Connector Implementation Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              WTL HLR HSS Connector
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="NSPS Connector Implementation Guide" class="md-nav__button md-logo" aria-label="NSPS Connector Implementation Guide" data-md-component="logo">
+      
+  <img src="../../../assets/images/portaone-main-logo.png" alt="logo">
+
+    </a>
+    NSPS Connector Implementation Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../get-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mcp-instruction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a Connector with AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../connector-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connector Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NSPS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            NSPS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../NSPS/nsps-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSPS Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../NSPS/data-flows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Flows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../NSPS/technical-specifications.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Specifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Implementation Specific
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Implementation Specific
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/requirements.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Request Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Request Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/request-handling/request-body.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Request Body
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/request-handling/request-headers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Request Headers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/request-handling/event-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/logging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/error-handling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../implementation-specific/best-practices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deployment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../testing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    WTL HLR HSS Connector
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="overview.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    WTL HLR HSS Connector
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connector-flow-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connector Flow Explained
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connector Flow Explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-accept-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accept request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enforce-bearer-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enforce Bearer auth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-set-request-context-and-json-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Set request context and JSON logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-validate-payload-against-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Validate payload against schemas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-map-event_type-wtl-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Map event_type → WTL action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-extract-and-derive-identifiers-and-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Extract and derive identifiers and attributes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-build-the-unified-wtl-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Build the unified WTL request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-call-wtl-api-and-map-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Call WTL API and map errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-return-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Return response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simple-connector-fastapi/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simple Connector FastAPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TypeScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../typescript/simple-connector-express/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simple Connector Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connector-flow-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connector Flow Explained
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connector Flow Explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-accept-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accept request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enforce-bearer-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enforce Bearer auth
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-set-request-context-and-json-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Set request context and JSON logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-validate-payload-against-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Validate payload against schemas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-map-event_type-wtl-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Map event_type → WTL action
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-extract-and-derive-identifiers-and-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Extract and derive identifiers and attributes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-build-the-unified-wtl-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Build the unified WTL request
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-call-wtl-api-and-map-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Call WTL API and map errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-return-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Return response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="overview">Overview</h1>
+<p>This guide explains an example of building an <strong><abbr title="New Service Provisioning System">NSPS</abbr> connector</strong> in <strong>Python</strong> using <strong>FastAPI</strong>.<br />
+The connector receives events from <strong><abbr title="New Service Provisioning System">NSPS</abbr></strong>, validates and processes the payload, and then forwards the enriched data to an external system (in this example — <strong>Google Sheets</strong>).<br />
+It also demonstrates how to implement <strong>Bearer token authentication</strong> and how to construct proper responses for <strong><abbr title="New Service Provisioning System">NSPS</abbr></strong>, ensuring events are handled correctly.</p>
+<p>You can find the full example repository here: <a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector">WTL HLR-<abbr title="Home Subscriber Server">HSS</abbr> Connector</a></p>
+<h2 id="workflow">Workflow</h2>
+<ol>
+<li>Accept HTTP request to <code>POST /process-event</code> with Bearer auth.</li>
+<li>Set request context (trace IDs) and JSON logging via middleware.</li>
+<li>Validate payload against the <code>Event</code> schema (includes <code>data</code> and optional <code>pb_data</code>).</li>
+<li>Determine provisioning action from <code>event_type</code>.</li>
+<li>Extract required identifiers and attributes from <code>pb_data</code>:<ul>
+<li>IMSI (required), MSISDN (from <code>account_info.id</code> when <code>bill_status == open</code>)</li>
+<li>Subscriber status derived from <code>blocked</code> and <code>bill_status</code></li>
+<li>Profiles (<code>cs_profile</code>, <code>eps_profile</code>) from access policy or defaults</li>
+<li>Optional IMSI regex validation</li>
+</ul>
+</li>
+<li>Build a unified request for the WTL API.</li>
+<li>Call the external WTL API with retry-safe HTTP client and map errors to typed responses.</li>
+<li>Return 202 on success (accepted/processed) or a standardized JSON error.</li>
+</ol>
+<h2 id="connector-flow-explained">Connector Flow Explained</h2>
+<h3 id="1-accept-request">1. Accept request</h3>
+<p>The microservice exposes a single POST endpoint at <code>/process-event</code> using FastAPI. This endpoint is designed to be minimal, delegating all business logic to a processor function. The endpoint expects a JSON payload matching the <code>Event</code> schema and is protected by authentication (see next step). The handler simply receives the validated event data and passes it to the event processor, which orchestrates the rest of the workflow.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;HLR/HSS Connector Microservice&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Processes PortaBilling ESPF events (post-NSPS) and syncs with HLR/HSS Core system&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-51">51</a></span>
+<span class="normal"><a href="#__codelineno-1-52">52</a></span>
+<span class="normal"><a href="#__codelineno-1-53">53</a></span>
+<span class="normal"><a href="#__codelineno-1-54">54</a></span>
+<span class="normal"><a href="#__codelineno-1-55">55</a></span>
+<span class="normal"><a href="#__codelineno-1-56">56</a></span>
+<span class="normal"><a href="#__codelineno-1-57">57</a></span>
+<span class="normal"><a href="#__codelineno-1-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51"></a><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52"></a>    <span class="s2">&quot;/process-event&quot;</span><span class="p">,</span>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53"></a>    <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="n">Depends</span><span class="p">(</span><span class="n">verify_token</span><span class="p">)],</span>
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54"></a>    <span class="n">response_model</span><span class="o">=</span><span class="n">EventResponse</span><span class="p">,</span>
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55"></a>    <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_202_ACCEPTED</span><span class="p">,</span>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56"></a><span class="p">)</span>
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_event</span><span class="p">(</span><span class="n">event_data</span><span class="p">:</span> <span class="n">Event</span><span class="p">):</span>
+</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58"></a>    <span class="k">return</span> <span class="n">event_processor</span><span class="o">.</span><span class="n">process_event</span><span class="p">(</span><span class="n">event_data</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py">View source: <code>app/main.py</code></a></p>
+<hr />
+<h3 id="2-enforce-bearer-auth">2. Enforce Bearer auth</h3>
+<p>Authentication is handled by a dependency (<code>Depends(verify_token)</code>) that checks for a valid Bearer token in the request. The <code>verify_token</code> function compares the provided token to a value stored in environment variables. If the token is missing or incorrect, the function raises an HTTP 401 error with a standard <code>WWW-Authenticate: Bearer</code> header, ensuring clients know how to authenticate. This approach centralizes security logic, making it easy to update or reuse across endpoints.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="n">security</span> <span class="o">=</span> <span class="n">HTTPBearer</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/main.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-34">34</a></span>
+<span class="normal"><a href="#__codelineno-3-35">35</a></span>
+<span class="normal"><a href="#__codelineno-3-36">36</a></span>
+<span class="normal"><a href="#__codelineno-3-37">37</a></span>
+<span class="normal"><a href="#__codelineno-3-38">38</a></span>
+<span class="normal"><a href="#__codelineno-3-39">39</a></span>
+<span class="normal"><a href="#__codelineno-3-40">40</a></span>
+<span class="normal"><a href="#__codelineno-3-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34"></a><span class="k">def</span><span class="w"> </span><span class="nf">verify_token</span><span class="p">(</span><span class="n">credentials</span><span class="p">:</span> <span class="n">HTTPAuthorizationCredentials</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">security</span><span class="p">)):</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35"></a>    <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">credentials</span> <span class="o">!=</span> <span class="n">settings</span><span class="o">.</span><span class="n">API_TOKEN</span><span class="p">:</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36"></a>        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37"></a>            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38"></a>            <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Invalid access token&quot;</span><span class="p">,</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39"></a>            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;WWW-Authenticate&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span><span class="p">},</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40"></a>        <span class="p">)</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41"></a>    <span class="k">return</span> <span class="n">credentials</span><span class="o">.</span><span class="n">credentials</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/main.py">View source: <code>app/main.py</code></a></p>
+<ul>
+<li>Why Bearer here: <abbr title="New Service Provisioning System">NSPS</abbr> authenticates with a shared secret; rotating the token only requires changing env vars.</li>
+<li>Failure behavior: 401 is returned with <code>WWW-Authenticate: Bearer</code>, which is standard for API clients.</li>
+</ul>
+<h3 id="3-set-request-context-and-json-logging">3. Set request context and JSON logging</h3>
+<p>Before processing each request, middleware sets up tracing context by extracting or generating unique request IDs from headers. This ensures every request is traceable in logs, even if the client does not provide tracing headers. The middleware attaches these IDs to the request context and logs the completion of each HTTP request in structured JSON format, including status codes and timestamps. This makes debugging and monitoring much easier, especially in distributed or cloud environments.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/core/middleware.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_request_context</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="n">REQUEST_ID_VAR</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REQUEST_ID_HEADER</span><span class="p">,</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">16</span><span class="p">]))</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18"></a>    <span class="n">UNIQUE_ID_VAR</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">UNIQUE_ID_HEADER</span><span class="p">,</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">16</span><span class="p">]))</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/core/middleware.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">request_context_middleware</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a>    <span class="n">set_request_context</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a>    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25"></a>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26"></a>        <span class="s2">&quot;HTTP request completed&quot;</span><span class="p">,</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">},</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28"></a>    <span class="p">)</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29"></a>    <span class="k">return</span> <span class="n">response</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/middleware.py">View source: <code>app/core/middleware.py</code></a></p>
+<ul>
+<li>Log shape: JSON via structlog with automatic timestamp and traced IDs.</li>
+</ul>
+<h3 id="4-validate-payload-against-schemas">4. Validate payload against schemas</h3>
+<p>Incoming requests are validated against Pydantic models before any business logic runs. The <code>Event</code> model requires an <code>event_id</code>, a nested <code>data</code> object (with <code>event_type</code> and <code>variables</code>), and optionally a <code>pb_data</code> object. If any required fields are missing or malformed, FastAPI automatically returns a 422 error, making it clear to clients what is wrong with their request. This strict validation ensures that only well-formed data reaches the business logic, reducing the risk of runtime errors.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/models/events.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-363">363</a></span>
+<span class="normal"><a href="#__codelineno-6-364">364</a></span>
+<span class="normal"><a href="#__codelineno-6-365">365</a></span>
+<span class="normal"><a href="#__codelineno-6-366">366</a></span>
+<span class="normal"><a href="#__codelineno-6-367">367</a></span>
+<span class="normal"><a href="#__codelineno-6-368">368</a></span>
+<span class="normal"><a href="#__codelineno-6-369">369</a></span>
+<span class="normal"><a href="#__codelineno-6-370">370</a></span>
+<span class="normal"><a href="#__codelineno-6-371">371</a></span>
+<span class="normal"><a href="#__codelineno-6-372">372</a></span>
+<span class="normal"><a href="#__codelineno-6-373">373</a></span>
+<span class="normal"><a href="#__codelineno-6-374">374</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-363"><a id="__codelineno-6-363" name="__codelineno-6-363"></a><span class="k">class</span><span class="w"> </span><span class="nc">Event</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-6-364"><a id="__codelineno-6-364" name="__codelineno-6-364"></a>    <span class="n">event_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-6-365"><a id="__codelineno-6-365" name="__codelineno-6-365"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unique identifier of the event&quot;</span><span class="p">,</span>
+</span><span id="__span-6-366"><a id="__codelineno-6-366" name="__codelineno-6-366"></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a3623086-24c2-47fb-a17f-929d9e542ed2&quot;</span><span class="p">]</span>
+</span><span id="__span-6-367"><a id="__codelineno-6-367" name="__codelineno-6-367"></a>    <span class="p">)</span>
+</span><span id="__span-6-368"><a id="__codelineno-6-368" name="__codelineno-6-368"></a>    <span class="n">data</span><span class="p">:</span> <span class="n">ESPFEvent</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-6-369"><a id="__codelineno-6-369" name="__codelineno-6-369"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Event data containing type and variables&quot;</span>
+</span><span id="__span-6-370"><a id="__codelineno-6-370" name="__codelineno-6-370"></a>    <span class="p">)</span>
+</span><span id="__span-6-371"><a id="__codelineno-6-371" name="__codelineno-6-371"></a>    <span class="n">pb_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PBData</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-6-372"><a id="__codelineno-6-372" name="__codelineno-6-372"></a>        <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-6-373"><a id="__codelineno-6-373" name="__codelineno-6-373"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Simplified PortaBilling data with only essential fields&quot;</span>
+</span><span id="__span-6-374"><a id="__codelineno-6-374" name="__codelineno-6-374"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/models/events.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-351">351</a></span>
+<span class="normal"><a href="#__codelineno-7-352">352</a></span>
+<span class="normal"><a href="#__codelineno-7-353">353</a></span>
+<span class="normal"><a href="#__codelineno-7-354">354</a></span>
+<span class="normal"><a href="#__codelineno-7-355">355</a></span>
+<span class="normal"><a href="#__codelineno-7-356">356</a></span>
+<span class="normal"><a href="#__codelineno-7-357">357</a></span>
+<span class="normal"><a href="#__codelineno-7-358">358</a></span>
+<span class="normal"><a href="#__codelineno-7-359">359</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-351"><a id="__codelineno-7-351" name="__codelineno-7-351"></a><span class="k">class</span><span class="w"> </span><span class="nc">ESPFEvent</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-7-352"><a id="__codelineno-7-352" name="__codelineno-7-352"></a>    <span class="n">event_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-7-353"><a id="__codelineno-7-353" name="__codelineno-7-353"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The type of the event&quot;</span><span class="p">,</span>
+</span><span id="__span-7-354"><a id="__codelineno-7-354" name="__codelineno-7-354"></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SIM/Updated&quot;</span><span class="p">]</span>
+</span><span id="__span-7-355"><a id="__codelineno-7-355" name="__codelineno-7-355"></a>    <span class="p">)</span>
+</span><span id="__span-7-356"><a id="__codelineno-7-356" name="__codelineno-7-356"></a>    <span class="n">variables</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="__span-7-357"><a id="__codelineno-7-357" name="__codelineno-7-357"></a>        <span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span>
+</span><span id="__span-7-358"><a id="__codelineno-7-358" name="__codelineno-7-358"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;All event variables passed as-is from original event&quot;</span><span class="p">,</span>
+</span><span id="__span-7-359"><a id="__codelineno-7-359" name="__codelineno-7-359"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/events.py">View source: <code>app/models/events.py</code></a></p>
+<h3 id="5-map-event_type-wtl-action">5. Map event_type → WTL action</h3>
+<p>The connector uses a mapping to translate incoming event types (such as <code>SIM/Updated</code>) into specific provisioning actions for the WTL system (like <code>update</code>). This mapping is explicit and easy to extend, making it clear which event types are supported. If an unknown event type is received, the system logs the event and returns a 202 response, ensuring that unsupported events do not break the <abbr title="New Service Provisioning System">NSPS</abbr> pipeline. This design makes the connector robust and easy to maintain.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/models/wtl.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="k">class</span><span class="w"> </span><span class="nc">WTLProvAction</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34"></a>    <span class="n">INSERT</span> <span class="o">=</span> <span class="s2">&quot;insert&quot;</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35"></a>    <span class="n">UPDATE</span> <span class="o">=</span> <span class="s2">&quot;update&quot;</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36"></a>    <span class="n">DELETE</span> <span class="o">=</span> <span class="s2">&quot;delete&quot;</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37"></a>    <span class="n">SET</span> <span class="o">=</span> <span class="s2">&quot;set&quot;</span>
+</span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38"></a>    <span class="n">UNSET</span> <span class="o">=</span> <span class="s2">&quot;unset&quot;</span>
+</span><span id="__span-8-39"><a id="__codelineno-8-39" name="__codelineno-8-39"></a>    <span class="n">MODIFY</span> <span class="o">=</span> <span class="s2">&quot;modify&quot;</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/models/wtl.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-42">42</a></span>
+<span class="normal"><a href="#__codelineno-9-43">43</a></span>
+<span class="normal"><a href="#__codelineno-9-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42"></a><span class="n">EVENT_ACTION_MAP</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43"></a>    <span class="n">EventType</span><span class="o">.</span><span class="n">SIM_UPDATED</span><span class="p">:</span> <span class="n">WTLProvAction</span><span class="o">.</span><span class="n">UPDATE</span><span class="p">,</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/models/wtl.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-47">47</a></span>
+<span class="normal"><a href="#__codelineno-10-48">48</a></span>
+<span class="normal"><a href="#__codelineno-10-49">49</a></span>
+<span class="normal"><a href="#__codelineno-10-50">50</a></span>
+<span class="normal"><a href="#__codelineno-10-51">51</a></span>
+<span class="normal"><a href="#__codelineno-10-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47"></a><span class="k">class</span><span class="w"> </span><span class="nc">EventWTLActionMapper</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48"></a>    <span class="n">event_type</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49"></a>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50"></a>    <span class="nd">@property</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52"></a>        <span class="k">return</span> <span class="n">EVENT_ACTION_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">event_type</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/models/wtl.py">View source: <code>app/models/wtl.py</code></a></p>
+<h3 id="6-extract-and-derive-identifiers-and-attributes">6. Extract and derive identifiers and attributes</h3>
+<p>The connector extracts all required identifiers and attributes from the incoming event and its nested data. Helper methods in <code>pb_event.py</code> handle extraction of IMSI, MSISDN, account ID, billing status, block status, and profiles. These methods encapsulate logic for handling missing fields, applying defaults, and validating values (such as IMSI format via regex). This separation makes the code easier to test and adapt to changes in the event schema, and ensures that all required data is available before building the WTL request.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_imsi_from_sim_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_info</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim_info</span><span class="o">.</span><span class="n">imsi</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_account_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span><span class="p">:</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33"></a>        <span class="k">return</span> <span class="kc">None</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34"></a>    <span class="n">account_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span><span class="o">.</span><span class="n">id</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35"></a>    <span class="k">return</span> <span class="n">account_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@msisdn&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;@msisdn&quot;</span> <span class="ow">in</span> <span class="n">account_id</span> <span class="k">else</span> <span class="kc">None</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-37">37</a></span>
+<span class="normal"><a href="#__codelineno-13-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_bill_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BillStatus</span><span class="p">]:</span>
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span><span class="o">.</span><span class="n">bill_status</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-40">40</a></span>
+<span class="normal"><a href="#__codelineno-14-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-40"><a id="__codelineno-14-40" name="__codelineno-14-40"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_block_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+</span><span id="__span-14-41"><a id="__codelineno-14-41" name="__codelineno-14-41"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">account_info</span><span class="o">.</span><span class="n">blocked</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-68">68</a></span>
+<span class="normal"><a href="#__codelineno-15-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-68"><a id="__codelineno-15-68" name="__codelineno-15-68"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_cs_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-15-69"><a id="__codelineno-15-69" name="__codelineno-15-69"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_profile</span><span class="p">(</span><span class="s2">&quot;cs_profile&quot;</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">WTL_DEFAULT_CS_PROFILE</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/pb_event.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-26">26</a></span>
+<span class="normal"><a href="#__codelineno-16-27">27</a></span>
+<span class="normal"><a href="#__codelineno-16-28">28</a></span>
+<span class="normal"><a href="#__codelineno-16-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-26"><a id="__codelineno-16-26" name="__codelineno-16-26"></a><span class="k">def</span><span class="w"> </span><span class="nf">validate_imsi_using_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imsi</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="__span-16-27"><a id="__codelineno-16-27" name="__codelineno-16-27"></a>    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">WTL_IMSI_REGEXP</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">WTL_IMSI_REGEXP</span><span class="p">,</span> <span class="n">imsi</span><span class="p">):</span>
+</span><span id="__span-16-28"><a id="__codelineno-16-28" name="__codelineno-16-28"></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="__span-16-29"><a id="__codelineno-16-29" name="__codelineno-16-29"></a>    <span class="k">return</span> <span class="kc">True</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/pb_event.py">View source: <code>app/services/pb_event.py</code></a></p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/core/event_processor.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-56">56</a></span>
+<span class="normal"><a href="#__codelineno-17-57">57</a></span>
+<span class="normal"><a href="#__codelineno-17-58">58</a></span>
+<span class="normal"><a href="#__codelineno-17-59">59</a></span>
+<span class="normal"><a href="#__codelineno-17-60">60</a></span>
+<span class="normal"><a href="#__codelineno-17-61">61</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-56"><a id="__codelineno-17-56" name="__codelineno-17-56"></a><span class="n">subscriber_status</span> <span class="o">=</span> <span class="n">SubscriberStatus</span><span class="o">.</span><span class="n">OPERATOR_DETERMINED_BARRING</span><span class="o">.</span><span class="n">value</span>
+</span><span id="__span-17-57"><a id="__codelineno-17-57" name="__codelineno-17-57"></a><span class="k">if</span> <span class="p">(</span>
+</span><span id="__span-17-58"><a id="__codelineno-17-58" name="__codelineno-17-58"></a>    <span class="ow">not</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_block_status</span><span class="p">()</span>
+</span><span id="__span-17-59"><a id="__codelineno-17-59" name="__codelineno-17-59"></a>    <span class="ow">and</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_bill_status</span><span class="p">()</span> <span class="o">==</span> <span class="n">BillStatus</span><span class="o">.</span><span class="n">OPEN</span><span class="o">.</span><span class="n">value</span>
+</span><span id="__span-17-60"><a id="__codelineno-17-60" name="__codelineno-17-60"></a><span class="p">):</span>
+</span><span id="__span-17-61"><a id="__codelineno-17-61" name="__codelineno-17-61"></a>    <span class="n">subscriber_status</span> <span class="o">=</span> <span class="n">SubscriberStatus</span><span class="o">.</span><span class="n">SERVICE_GRANTED</span><span class="o">.</span><span class="n">value</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py">View source: <code>app/core/event_processor.py</code></a></p>
+<h3 id="7-build-the-unified-wtl-request">7. Build the unified WTL request</h3>
+<p>Once all required data is extracted and derived, the connector constructs a <code>UnifiedSyncRequest</code> object. This object aggregates all the necessary fields—IMSI, subscriber status, MSISDN list, CS and EPS profiles, and the action to perform. The use of Pydantic models ensures that the request is strictly validated before being sent, reducing the risk of malformed requests reaching the WTL API. This step keeps the business logic clean and focused on data transformation.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/core/event_processor.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-64">64</a></span>
+<span class="normal"><a href="#__codelineno-18-65">65</a></span>
+<span class="normal"><a href="#__codelineno-18-66">66</a></span>
+<span class="normal"><a href="#__codelineno-18-67">67</a></span>
+<span class="normal"><a href="#__codelineno-18-68">68</a></span>
+<span class="normal"><a href="#__codelineno-18-69">69</a></span>
+<span class="normal"><a href="#__codelineno-18-70">70</a></span>
+<span class="normal"><a href="#__codelineno-18-71">71</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-64"><a id="__codelineno-18-64" name="__codelineno-18-64"></a><span class="n">request_data</span> <span class="o">=</span> <span class="n">UnifiedSyncRequest</span><span class="p">(</span>
+</span><span id="__span-18-65"><a id="__codelineno-18-65" name="__codelineno-18-65"></a>    <span class="n">imsi</span><span class="o">=</span><span class="n">imsi</span><span class="p">,</span>
+</span><span id="__span-18-66"><a id="__codelineno-18-66" name="__codelineno-18-66"></a>    <span class="n">subscriber_status</span><span class="o">=</span><span class="n">subscriber_status</span><span class="p">,</span>
+</span><span id="__span-18-67"><a id="__codelineno-18-67" name="__codelineno-18-67"></a>    <span class="n">msisdn</span><span class="o">=</span><span class="n">msisdn_list</span><span class="p">,</span>
+</span><span id="__span-18-68"><a id="__codelineno-18-68" name="__codelineno-18-68"></a>    <span class="n">cs_profile</span><span class="o">=</span><span class="n">processor</span><span class="o">.</span><span class="n">get_cs_profile</span><span class="p">(),</span>
+</span><span id="__span-18-69"><a id="__codelineno-18-69" name="__codelineno-18-69"></a>    <span class="n">eps_profile</span><span class="o">=</span><span class="n">processor</span><span class="o">.</span><span class="n">get_eps_profile</span><span class="p">(),</span>
+</span><span id="__span-18-70"><a id="__codelineno-18-70" name="__codelineno-18-70"></a>    <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span>
+</span><span id="__span-18-71"><a id="__codelineno-18-71" name="__codelineno-18-71"></a><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py">View source: <code>app/core/event_processor.py</code></a></p>
+<h3 id="8-call-wtl-api-and-map-errors">8. Call WTL API and map errors</h3>
+<p>The connector sends the unified request to the WTL API using an HTTP client with a configurable timeout and custom headers. The response is parsed and validated against a response model. If the WTL API indicates a failure, the connector raises a domain-specific exception, which is then mapped to an appropriate HTTP error code for the client. This separation of concerns ensures that transport errors and business errors are handled cleanly and consistently.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/services/wtl_client.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-33">33</a></span>
+<span class="normal"><a href="#__codelineno-19-34">34</a></span>
+<span class="normal"><a href="#__codelineno-19-35">35</a></span>
+<span class="normal"><a href="#__codelineno-19-36">36</a></span>
+<span class="normal"><a href="#__codelineno-19-37">37</a></span>
+<span class="normal"><a href="#__codelineno-19-38">38</a></span>
+<span class="normal"><a href="#__codelineno-19-39">39</a></span>
+<span class="normal"><a href="#__codelineno-19-40">40</a></span>
+<span class="normal"><a href="#__codelineno-19-41">41</a></span>
+<span class="normal"><a href="#__codelineno-19-42">42</a></span>
+<span class="normal"><a href="#__codelineno-19-43">43</a></span>
+<span class="normal"><a href="#__codelineno-19-44">44</a></span>
+<span class="normal"><a href="#__codelineno-19-45">45</a></span>
+<span class="normal"><a href="#__codelineno-19-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-33"><a id="__codelineno-19-33" name="__codelineno-19-33"></a><span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
+</span><span id="__span-19-34"><a id="__codelineno-19-34" name="__codelineno-19-34"></a>    <span class="n">timeout</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">WTL_HTTP_REQUESTS_TIMEOUT</span><span class="p">,</span>
+</span><span id="__span-19-35"><a id="__codelineno-19-35" name="__codelineno-19-35"></a>    <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+</span><span id="__span-19-36"><a id="__codelineno-19-36" name="__codelineno-19-36"></a><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="__span-19-37"><a id="__codelineno-19-37" name="__codelineno-19-37"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_none</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</span><span id="__span-19-38"><a id="__codelineno-19-38" name="__codelineno-19-38"></a>    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span><span id="__span-19-39"><a id="__codelineno-19-39" name="__codelineno-19-39"></a>
+</span><span id="__span-19-40"><a id="__codelineno-19-40" name="__codelineno-19-40"></a>    <span class="n">wtl_response</span> <span class="o">=</span> <span class="n">WTLResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</span><span id="__span-19-41"><a id="__codelineno-19-41" name="__codelineno-19-41"></a>
+</span><span id="__span-19-42"><a id="__codelineno-19-42" name="__codelineno-19-42"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">wtl_response</span><span class="o">.</span><span class="n">is_successful</span><span class="p">:</span>
+</span><span id="__span-19-43"><a id="__codelineno-19-43" name="__codelineno-19-43"></a>        <span class="k">raise</span> <span class="n">WTLServiceError</span><span class="p">(</span>
+</span><span id="__span-19-44"><a id="__codelineno-19-44" name="__codelineno-19-44"></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;WTL service error&quot;</span><span class="p">,</span>
+</span><span id="__span-19-45"><a id="__codelineno-19-45" name="__codelineno-19-45"></a>            <span class="n">error</span><span class="o">=</span><span class="n">wtl_response</span><span class="o">.</span><span class="n">error</span> <span class="ow">or</span> <span class="s2">&quot;Unknown error&quot;</span><span class="p">,</span>
+</span><span id="__span-19-46"><a id="__codelineno-19-46" name="__codelineno-19-46"></a>        <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/services/wtl_client.py">View source: <code>app/services/wtl_client.py</code></a></p>
+<h3 id="9-return-response">9. Return response</h3>
+<p>After successful processing, the endpoint returns a JSON response with a 202 Accepted status. This signals to <abbr title="New Service Provisioning System">NSPS</abbr> that the event was received and processed (or queued) successfully, allowing the pipeline to continue without waiting for downstream systems. If any error occurs, the connector returns a standardized error response with the appropriate HTTP status code, making it easy for clients to handle failures.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">app/core/event_processor.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-86">86</a></span>
+<span class="normal"><a href="#__codelineno-20-87">87</a></span>
+<span class="normal"><a href="#__codelineno-20-88">88</a></span>
+<span class="normal"><a href="#__codelineno-20-89">89</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-86"><a id="__codelineno-20-86" name="__codelineno-20-86"></a><span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span>
+</span><span id="__span-20-87"><a id="__codelineno-20-87" name="__codelineno-20-87"></a>    <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Event processed successfully&quot;</span><span class="p">},</span>
+</span><span id="__span-20-88"><a id="__codelineno-20-88" name="__codelineno-20-88"></a>    <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_202_ACCEPTED</span>
+</span><span id="__span-20-89"><a id="__codelineno-20-89" name="__codelineno-20-89"></a><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p><a href="https://gitlab.portaone.com:8949/read-only/wtl_hlr_hss_connector/-/tree/main/app/core/event_processor.py">View source: <code>app/core/event_processor.py</code></a></p>
+<!-- References -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../testing.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Testing">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Testing
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../simple-connector-fastapi/overview.html" class="md-footer__link md-footer__link--next" aria-label="Next: Simple Connector FastAPI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Simple Connector FastAPI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 PortaOne, Inc. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link", "content.code.copy", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
