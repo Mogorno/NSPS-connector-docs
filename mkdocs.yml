@@ -1,7 +1,7 @@
 site_name: NSPS Connector Implementation Guide
 site_url: https://mogorno.github.io/NSPS-connector-docs/
 nav:
-    - get-started.md
+    - Get Started: get-started.md
     - Introduction: index.md
     - mcp-instruction.md
     - connector-overview.md
