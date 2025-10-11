@@ -1,0 +1,2119 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mogorno.github.io/NSPS-connector-docs/implementation-specific/request-handling/request-body.html">
+      
+      
+        <link rel="prev" href="../requirements.html">
+      
+      
+        <link rel="next" href="request-headers.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Request Body - NSPS Connector Implementation Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#request-body" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="NSPS Connector Implementation Guide" class="md-header__button md-logo" aria-label="NSPS Connector Implementation Guide" data-md-component="logo">
+      
+  <img src="../../assets/images/portaone-main-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NSPS Connector Implementation Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Request Body
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="NSPS Connector Implementation Guide" class="md-nav__button md-logo" aria-label="NSPS Connector Implementation Guide" data-md-component="logo">
+      
+  <img src="../../assets/images/portaone-main-logo.png" alt="logo">
+
+    </a>
+    NSPS Connector Implementation Guide
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../get-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mcp-instruction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Create a Connector with AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connector-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connector Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NSPS
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            NSPS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NSPS/nsps-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSPS Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NSPS/data-flows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Flows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NSPS/technical-specifications.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Specifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Implementation Specific
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Implementation Specific
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Request Handling
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Request Handling
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Request Body
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="request-body.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Request Body
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#espf-event-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESPF Event Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portabilling-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      PortaBilling Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PortaBilling Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Info
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Info">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigned-add-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assigned Add-on
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Feature
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sim-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIM Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-policy-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Policy Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#product-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vd-counter-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      VD Counter Info
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="request-headers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Request Headers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="event-types.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../best-practices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deployment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/python/wtl-hlr-hss-connector/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    WTL HLR HSS Connector
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/python/simple-connector-fastapi/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simple Connector FastAPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TypeScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/typescript/simple-connector-express/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simple Connector Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#espf-event-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      ESPF Event Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portabilling-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      PortaBilling Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PortaBilling Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Info
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Account Info">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigned-add-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assigned Add-on
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Feature
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sim-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIM Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-policy-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access Policy Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#product-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vd-counter-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      VD Counter Info
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="request-body">Request Body</h1>
+<h2 id="espf-event-data"><abbr title="External System Provisioning Framework">ESPF</abbr> Event Data</h2>
+<p>The <a href="https://docs.portaone.com/docs/mr121-events-that-espf-handlers-support?topic=eventsender-handler-events"><abbr title="External System Provisioning Framework">ESPF</abbr> event</a> generated by <a href="https://docs.portaone.com/docs/mr121-provisioning-via-webhooks?topic=provisioning-event-version">EventSender</a> contains a limited set of <a href="https://docs.portaone.com/docs/mr121-provisioning-via-webhooks?topic=provisioning-event-version">variables</a> (<code>event_type</code>, <code>i_account</code>, <code>i_env</code>, etc.), but external systems usually require more information (about the main product, add-ons, used quotas, etc.).</p>
+<details class="example">
+<summary>Example of NSPF event</summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="s2">&quot;SIM/Updated&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nt">&quot;variables&quot;</span><span class="p">:{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">          </span><span class="nt">&quot;i_env&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">          </span><span class="nt">&quot;i_event&quot;</span><span class="p">:</span><span class="mi">999999</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">          </span><span class="nt">&quot;i_account&quot;</span><span class="p">:</span><span class="mi">277147</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">          </span><span class="nt">&quot;event_time&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-01 12:00:00&quot;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<p>Therefore, the <a href="../../NSPS/nsps-overview.html"><abbr title="New Service Provisioning System">NSPS</abbr> system</a> makes API requests api-requests to PortaBilling in order to get more information about the account, SIM, etc., which relates to the created event. The <abbr title="New Service Provisioning System">NSPS</abbr> adds all the necessary <a href="../../NSPS/data-flows.html#output">data</a> and passes it to the connector.</p>
+<p><abbr title="New Service Provisioning System">NSPS</abbr> sends the following request body to the connector (so the connector should accept it):</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pb_data</code></td>
+<td>No</td>
+<td>Enriched data from PortaBilling; includes account, SIM, and access policy info. Defaults empty.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Yes</td>
+<td>Event payload, represented by an instance of <code>ESPFEvent</code>.</td>
+</tr>
+<tr>
+<td><code>handler_id</code></td>
+<td>No</td>
+<td>Optional identifier of the handler assigned to process the event.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>No</td>
+<td>Status of event processing. Defaults to <code>EventStatus.UNDEFINED</code>.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>No</td>
+<td>Timestamp when the event was created.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>No</td>
+<td>Timestamp when the event was last enriched by <abbr title="New Service Provisioning System">NSPS</abbr>.</td>
+</tr>
+<tr>
+<td><code>event_id</code></td>
+<td>Yes</td>
+<td>Unique identifier of the event.</td>
+</tr>
+</tbody>
+</table>
+<p>The field called <code>data</code> contains the generated <abbr title="External System Provisioning Framework">ESPF</abbr> event as it is. So if you don't need additional info from PortaBilling, you can only use this data.</p>
+<p>The data structure for the <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>) is shown below. It includes all possible fields. The connector should contain logic to process only the parameters it needs, and unnecessary ones can be ignored.</p>
+<p>For a more detailed description of the parameters, please refer to <a href="https://docs.portaone.com/API/mr120/AccountInterface/#overview">docs.portaone.com</a>.</p>
+<h2 id="portabilling-data">PortaBilling Data</h2>
+<p><em>Type</em>: <code>PortaBillingData</code></p>
+<p>This section contains enriched data received from PortaBilling.
+It provides detailed information about the account, SIM card, products, features, policies, and usage counters associated with the subscriber.</p>
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>account_info</code></td>
+<td><a href="#account-info"><code>AccountInfo</code></a></td>
+<td>Main account-level data container.</td>
+</tr>
+<tr>
+<td><code>sim_info</code></td>
+<td><a href="#sim-info"><code>SimInfo</code></a></td>
+<td>SIM card information from PortaBilling.</td>
+</tr>
+<tr>
+<td><code>prev_sim_info</code></td>
+<td><a href="#sim-info"><code>SimInfo</code></a></td>
+<td>Previous SIM card information (used for SIM/Replaced events).</td>
+</tr>
+<tr>
+<td><code>access_policy_info</code></td>
+<td><code>List[</code><a href="#access-policy-info"><code>AccessPolicyInfo</code></a><code>]</code></td>
+<td>Access policy information from PortaBilling.</td>
+</tr>
+<tr>
+<td><code>product_info</code></td>
+<td><a href="#product-info"><code>ProductInfo</code></a></td>
+<td>Product information from PortaBilling.</td>
+</tr>
+<tr>
+<td><code>full_vd_counter_info</code></td>
+<td><code>List[</code><a href="#vd-counter-info"><code>VDCounterInfo</code></a><code>]</code></td>
+<td>VD counter information from PortaBilling.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="account-info">Account Info</h3>
+<p><em>Type</em>: <code>AccountInfo</code></p>
+<p><em>Relation</em>: <code>account_info</code>: <code>AccountInfo</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</p>
+<p>The main account-level data container.
+It provides billing information, account status, assigned product, customer relations, and owner’s contact details.</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bill_status</code></td>
+<td><code>str</code></td>
+<td>The billing status of the account. (1)</td>
+</tr>
+<tr>
+<td><code>billing_model</code></td>
+<td><code>str</code></td>
+<td>The account type. (2)</td>
+</tr>
+<tr>
+<td><code>blocked</code></td>
+<td><code>bool</code></td>
+<td>Boolean conversion - Indicates whether account's calls and access to the self-care interface is blocked. (3)</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>str</code></td>
+<td>The email address associated with the account.</td>
+</tr>
+<tr>
+<td><code>firstname</code></td>
+<td><code>str</code></td>
+<td>The account owner's first name.</td>
+</tr>
+<tr>
+<td><code>i_account</code></td>
+<td><code>int</code></td>
+<td>Internal ID of the account. Visible in URL resource path on Admin UI page.</td>
+</tr>
+<tr>
+<td><code>i_customer</code></td>
+<td><code>int</code></td>
+<td>The ID of the customer record to which the account belongs.</td>
+</tr>
+<tr>
+<td><code>i_master_account</code></td>
+<td><code>int</code></td>
+<td>The ID of the parent account.</td>
+</tr>
+<tr>
+<td><code>i_product</code></td>
+<td><code>int</code></td>
+<td>The ID for the account's product.</td>
+</tr>
+<tr>
+<td><code>i_vd_plan</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the bundle assigned to the account individually.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>str</code></td>
+<td>Charging ID (MSISDN, ICCID or IMSI) of the account on the network. Visible as ID in Admin UI.</td>
+</tr>
+<tr>
+<td><code>lastname</code></td>
+<td><code>str</code></td>
+<td>The account owner's last name.</td>
+</tr>
+<tr>
+<td><code>phone1</code></td>
+<td><code>str</code></td>
+<td>The main phone number.</td>
+</tr>
+<tr>
+<td><code>product_name</code></td>
+<td><code>str</code></td>
+<td>The name of the account's product.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>str</code></td>
+<td>The current status of the account based on factors such as "expiration time", "activation time" and so on. (4)</td>
+</tr>
+<tr>
+<td><code>time_zone_name</code></td>
+<td><code>str</code></td>
+<td>The name of the account's time zone. (5)</td>
+</tr>
+<tr>
+<td><code>zip</code></td>
+<td><code>str</code></td>
+<td>The postal (zip) code.</td>
+</tr>
+<tr>
+<td><code>assigned_addons</code></td>
+<td><code>List[</code><a href="#assigned-add-on"><code>AssignedAddon</code></a><code>]</code></td>
+<td>List of account's add-on products.</td>
+</tr>
+<tr>
+<td><code>service_features</code></td>
+<td><code>List[</code><a href="#service-feature"><code>AssignedAddon</code></a><code>]</code></td>
+<td>List of service features.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Mapped values (originally single-letter codes):<ul>
+<li><code>O</code> → active</li>
+<li><code>S</code> → suspended</li>
+<li><code>I</code> → inactive</li>
+<li><code>C</code> → terminated</li>
+</ul>
+</li>
+<li>Mapped values (originally int codes):<ul>
+<li>-1 → debit_account</li>
+<li>0 → recharge_voucher</li>
+<li>1 → credit_account</li>
+<li>2 → alias</li>
+<li>4 → beneficiary</li>
+</ul>
+</li>
+<li>originally <code>Y/N</code> <code>string</code>, converted <code>Y</code> → <code>False</code>, <code>N</code> → <code>True</code></li>
+<li>Possible values:<ul>
+<li><code>active</code></li>
+<li><code>customer_exported</code></li>
+<li><code>expired</code></li>
+<li><code>quarantine</code></li>
+<li><code>screening</code></li>
+<li><code>closed</code></li>
+<li><code>inactive</code></li>
+<li><code>customer_suspended</code></li>
+<li><code>customer_limited</code></li>
+<li><code>customer_provisionally_terminated</code></li>
+<li><code>blocked</code></li>
+<li><code>customer_blocked</code></li>
+<li><code>not_yet_active</code></li>
+<li><code>credit_exceeded</code></li>
+<li><code>overdraft</code></li>
+<li><code>customer_has_no_available_funds</code></li>
+<li><code>customer_credit_exceed</code></li>
+<li><code>zero_balance</code></li>
+<li><code>customer_suspension_delayed</code></li>
+<li><code>customer_limiting_delayed</code></li>
+<li><code>frozen</code></li>
+</ul>
+</li>
+<li>Examples: "Europe/Prague", "America/Vancouver", etc.</li>
+</ol>
+<details class="example">
+<summary>Example: <code>AccountInfo</code></summary>
+<div class="language-json highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;bill_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;open&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;billing_model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;credit_account&quot;</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;blocked&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nt">&quot;i_account&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="nt">&quot;i_customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6392</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="nt">&quot;i_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3774</span><span class="p">,</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;79123456789@msisdn&quot;</span><span class="p">,</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="nt">&quot;phone1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="nt">&quot;product_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wtl Pay as you go&quot;</span><span class="p">,</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="nt">&quot;time_zone_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Europe/Prague&quot;</span><span class="p">,</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="nt">&quot;assigned_addons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">            </span><span class="nt">&quot;addon_effective_from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-05-16T12:59:46&quot;</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">            </span><span class="nt">&quot;addon_priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">            </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">            </span><span class="nt">&quot;i_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3775</span><span class="p">,</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">            </span><span class="nt">&quot;i_vd_plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1591</span><span class="p">,</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wtl Youtube UHD&quot;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">    </span><span class="p">],</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">    </span><span class="nt">&quot;service_features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;netaccess_policy&quot;</span><span class="p">,</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="w">            </span><span class="nt">&quot;effective_flag_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">            </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;access_policy&quot;</span><span class="p">,</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">                    </span><span class="nt">&quot;effective_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;179&quot;</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">            </span><span class="p">]</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<h4 id="assigned-add-on">Assigned Add-on</h4>
+<p><em>Type</em>: <code>AssignedAddon</code></p>
+<p><em>Relation</em>: <code>assigned_addons</code>: <code>List[AssignedAddon]</code> in <a href="#account-info"><code>AccountInfo</code></a> (<code>account_info</code>)</p>
+<p>The list of the account's add-on products</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addon_effective_from</code></td>
+<td><code>str</code></td>
+<td>ISO datetime string - The date and time when the add-on product is activated for an account. (1)</td>
+</tr>
+<tr>
+<td><code>addon_effective_to</code></td>
+<td><code>str</code></td>
+<td>ISO datetime string - The date and time when the add-on product assigned to an account expires. (2)</td>
+</tr>
+<tr>
+<td><code>addon_priority</code></td>
+<td><code>int</code></td>
+<td>The priority level of the add-on product.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>str</code></td>
+<td>The internal product description.</td>
+</tr>
+<tr>
+<td><code>i_product</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the product.</td>
+</tr>
+<tr>
+<td><code>i_product_group</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the product group to which the product belongs.</td>
+</tr>
+<tr>
+<td><code>i_vd_plan</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the bundle assigned to the product.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>The product name.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Originally <code>Optional[str]</code> datetime</li>
+<li>Originally <code>Optional[str]</code> datetime</li>
+</ol>
+<details class="example">
+<summary>Example: <code>AssignedAddon</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span><span class="nt">&quot;addon_effective_from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-05-16T12:59:46&quot;</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="nt">&quot;addon_priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&quot;i_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3775</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&quot;i_vd_plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1591</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wtl Youtube UHD&quot;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<h4 id="service-feature">Service Feature</h4>
+<p><em>Type</em>: <code>ServiceFeature</code></p>
+<p><em>Relation</em>: <code>service_features</code>: <code>List[ServiceFeature]</code> in <a href="#account-info"><code>AccountInfo</code></a> (<code>account_info</code>)</p>
+<p>List of service features assigned to the account, each with its attributes.</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>The service feature name.</td>
+</tr>
+<tr>
+<td><code>effective_flag_value</code></td>
+<td><code>str</code></td>
+<td>The actual service feature flag value. (1)</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td><code>List[ServiceFeatureAttribute]</code></td>
+<td>The list of service feature attributes.</td>
+</tr>
+<tr>
+<td><code>attributes[].name</code></td>
+<td><code>str</code></td>
+<td>The service feature attribute internal name.</td>
+</tr>
+<tr>
+<td><code>attributes[].effective_value</code></td>
+<td><code>str</code></td>
+<td>Service feature attribute value, comma-separated if multiple values.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Possible values:<ul>
+<li><code>Y</code> → enabled</li>
+<li><code>N</code> → disabled</li>
+</ul>
+</li>
+</ol>
+<details class="example">
+<summary>Example: <code>ServiceFeature</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;netaccess_policy&quot;</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="nt">&quot;effective_flag_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;access_policy&quot;</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">                </span><span class="nt">&quot;effective_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;179&quot;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="p">]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<h3 id="sim-info">SIM Info</h3>
+<p><em>Type</em>: <code>SimInfo</code></p>
+<p><em>Relation</em>:</p>
+<ul>
+<li><code>sim_info</code>: <code>SimInfo</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</li>
+<li><code>prev_sim_info</code>: <code>SimInfo</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</li>
+</ul>
+<p>SIM card information from PortaBilling</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i_account</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the account to which the SIM card belongs.</td>
+</tr>
+<tr>
+<td><code>i_sim_card</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the SIM card.</td>
+</tr>
+<tr>
+<td><code>iccid</code></td>
+<td><code>str</code></td>
+<td>The Integrated Circuit Card ID.</td>
+</tr>
+<tr>
+<td><code>imsi</code></td>
+<td><code>str</code></td>
+<td>The unique International Mobile Subscriber Identity of the SIM card.</td>
+</tr>
+<tr>
+<td><code>msisdn</code></td>
+<td><code>str</code></td>
+<td>The Mobile Subscriber Integrated Services Digital Number.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>str</code></td>
+<td>The status of the SIM card. (1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Possible values:<ul>
+<li><code>available</code> → the SIM card is available for assignment,</li>
+<li><code>reserved</code> → reserved for the customer, but not yet assigned to the account,</li>
+<li><code>used</code> → SIM card is being used by the account,</li>
+<li><code>disposed</code> → SIM card is disposed and cannot be used.</li>
+</ul>
+</li>
+</ol>
+<details class="example">
+<summary>Example: <code>SimInfo</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="nt">&quot;i_sim_card&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3793</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="nt">&quot;imsi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001010000020349&quot;</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="nt">&quot;msisdn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;79123456789&quot;</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<h3 id="access-policy-info">Access Policy Info</h3>
+<p><em>Type</em>: <code>AccessPolicyInfo</code></p>
+<p><em>Relation</em>: <code>access_policy_info</code>: <code>AccessPolicyInfo</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</p>
+<p>Information about access policies applied to the account.</p>
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i_access_policy</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the Access Policy.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>The name of the Access Policy.</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td><code>List[AccessPolicyAttribute]</code></td>
+<td>The list of related service policy attribute values.</td>
+</tr>
+<tr>
+<td><code>attributes[].group_name</code></td>
+<td><code>str</code></td>
+<td>The name used to group service policy attributes.</td>
+</tr>
+<tr>
+<td><code>attributes[].name</code></td>
+<td><code>str</code></td>
+<td>The name of the service policy attribute.</td>
+</tr>
+<tr>
+<td><code>attributes[].value</code></td>
+<td><code>str</code></td>
+<td>Service policy attribute value, comma-separated if multiple values.</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>Example: <code>AccessPolicyInfo</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span><span class="nt">&quot;i_access_policy&quot;</span><span class="p">:</span><span class="mi">179</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;WTL integration test&quot;</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:[</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">                </span><span class="nt">&quot;group_name&quot;</span><span class="p">:</span><span class="s2">&quot;lte.wtl&quot;</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;cs_profile&quot;</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;cs-pp-20250319&quot;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">            </span><span class="p">},</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">                </span><span class="nt">&quot;group_name&quot;</span><span class="p">:</span><span class="s2">&quot;lte.wtl&quot;</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;eps_profile&quot;</span><span class="p">,</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;eps-pp-20250319&quot;</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="p">]</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<h3 id="product-info">Product Info</h3>
+<p><em>Type</em>: <code>ProductInfo</code></p>
+<p><em>Relation</em>: <code>product_info</code>: <code>ProductInfo</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</p>
+<p>Product information from PortaBilling</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>The product name.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>str</code></td>
+<td>The internal product description.</td>
+</tr>
+<tr>
+<td><code>i_product</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the product.</td>
+</tr>
+<tr>
+<td><code>i_vd_plan</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the bundle assigned to the product. <!-- Тут можливо помилка! --></td>
+</tr>
+<tr>
+<td><code>addon_priority</code></td>
+<td><code>int</code></td>
+<td>The priority level of the add-on product. (1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>
+<ul>
+<li>0 → main product</li>
+<li>10 → low</li>
+<li>15 → medium low</li>
+<li>20 → medium</li>
+<li>25 → medium high</li>
+<li>30 → high</li>
+</ul>
+</li>
+</ol>
+<details class="example">
+<summary>Example: <code>ProductInfo</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;DEV WTL Pay as you go&quot;</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nt">&quot;addon_priority&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">&quot;i_product&quot;</span><span class="p">:</span><span class="mi">658</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<h3 id="vd-counter-info">VD Counter Info</h3>
+<p><em>Type</em>: <code>VDCounterInfo</code></p>
+<p><em>Relation</em>: <code>full_vd_counter_info</code>: <code>List[VDCounterInfo]</code> in <a href="#portabilling-data"><code>PortaBillingData</code></a> (<code>pb_data</code>)</p>
+<p>VD counter information from PortaBilling</p>
+<div class="annotate">
+<table>
+<thead>
+<tr>
+<th>Field Path</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discount_info</code></td>
+<td><code>str</code></td>
+<td>Short representation of the discount details (e.g., '0..60 - 100%').</td>
+</tr>
+<tr>
+<td><code>dg_name</code></td>
+<td><code>str</code></td>
+<td>The name of the destination group the bundle item is applied to.</td>
+</tr>
+<tr>
+<td><code>i_vd_plan</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the bundle.</td>
+</tr>
+<tr>
+<td><code>i_dest_group</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the destination group the discount is applied to.</td>
+</tr>
+<tr>
+<td><code>allocated_amount</code></td>
+<td><code>float</code></td>
+<td>The total amount of service volume allocated to the customer/account in the current usage period.</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td><code>str</code></td>
+<td>The name of the service unit or currency used.</td>
+</tr>
+<tr>
+<td><code>addon_priority</code></td>
+<td><code>int</code></td>
+<td>The priority level of the bundle item. (1)</td>
+</tr>
+<tr>
+<td><code>vdp_name</code></td>
+<td><code>str</code></td>
+<td>The name of the bundle.</td>
+</tr>
+<tr>
+<td><code>i_vd_dg</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the bundle item.</td>
+</tr>
+<tr>
+<td><code>i_service</code></td>
+<td><code>int</code></td>
+<td>The unique ID of the service.</td>
+</tr>
+<tr>
+<td><code>service_name</code></td>
+<td><code>str</code></td>
+<td>The name of the service the discount is applied to.</td>
+</tr>
+<tr>
+<td><code>remaining</code></td>
+<td><code>float/str</code></td>
+<td>The service volume that remains to be used to reach the current threshold. (2)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>Possible values:<ul>
+<li>-1 → no priority</li>
+<li>0 → main product</li>
+<li>10 → low</li>
+<li>12 → bundled credit wallets</li>
+<li>13 → bundled credits</li>
+<li>14 → bundled credit preferred wallets</li>
+<li>15 → medium low</li>
+<li>20 → medium</li>
+<li>25 → medium high</li>
+<li>30 → high</li>
+<li>255 → not part of a product</li>
+</ul>
+</li>
+<li>Can be numeric value or string like <code>N/A</code></li>
+</ol>
+<details class="example">
+<summary>Example: <code>VDCounterInfo</code></summary>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">        </span><span class="nt">&quot;service_name&quot;</span><span class="p">:</span><span class="s2">&quot;Internet Access KB&quot;</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="nt">&quot;vdp_name&quot;</span><span class="p">:</span><span class="s2">&quot;DEV WTL Free 10MB (1 day)&quot;</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">        </span><span class="nt">&quot;i_vd_plan&quot;</span><span class="p">:</span><span class="mi">204</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nt">&quot;i_dest_group&quot;</span><span class="p">:</span><span class="mi">2650</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nt">&quot;addon_priority&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nt">&quot;i_vd_dg&quot;</span><span class="p">:</span><span class="mi">283</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="nt">&quot;remaining&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="nt">&quot;i_service&quot;</span><span class="p">:</span><span class="mi">106</span><span class="p">,</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="nt">&quot;dg_name&quot;</span><span class="p">:</span><span class="s2">&quot;RG100&quot;</span><span class="p">,</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="nt">&quot;discount_info&quot;</span><span class="p">:</span><span class="s2">&quot;0..10 - 100%&quot;</span><span class="p">,</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="s2">&quot;megabyte&quot;</span><span class="p">,</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="nt">&quot;allocated_amount&quot;</span><span class="p">:</span><span class="mi">10</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="p">}</span>
+</span></code></pre></div>
+</details>
+<!-- References -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../requirements.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Requirements">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Requirements
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="request-headers.html" class="md-footer__link md-footer__link--next" aria-label="Next: Request Headers">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Request Headers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 PortaOne, Inc. All rights reserved.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link", "content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
